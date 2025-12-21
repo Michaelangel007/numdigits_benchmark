@@ -100,7 +100,7 @@ These StackOverflow questions ...
 * FAIL to provide proof, and
 * FAIL to provide verification the implementation is correct.
 
-Specificially,
+Specifically,
 
 * SOME only provided an uint64_t version so we are left to provide a native `int` version,
 * SOME of them have bugs such as
@@ -245,7 +245,7 @@ We need to verify each implementation passes:
 * powers-of-10
 * nines
 
-Using a data-driven approach makes this trivial to extend tests.  I used these manual tables to verify that each implementation worked correctly (since I couldn't trust ANY implementation) when I discovered a bug in the slide version of Andrei's `digits10()` as discussed in the [Introduction](introduction).
+Using a data-driven approach makes this trivial to extend tests.  I used these manual tables to verify that each implementation worked correctly (since I couldn't trust ANY implementation) when I discovered a bug in the slide version of Andrei's `digits10()` as discussed in the [Introduction](#introduction).
 
 ```c
     struct IntKeyVal
