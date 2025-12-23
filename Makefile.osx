@@ -1,0 +1,17 @@
+CC=g++
+C_FLAGS=-std=c++17 -O2 -Wall -Wextra -Iinc
+
+all: bin/ bin/numdigits_benchmark bin/verify_numdigits
+
+bin/:
+	mkdir -p bin
+
+clean:
+	rm bin/*
+
+bin/numdigits_benchmark: src/numdigits_benchmark.cpp inc/*.h
+	${CC} ${C_FLAGS} $< -o $@
+
+bin/verify_numdigits: src/verify_numdigits.cpp inc/*.h
+	${CC} ${C_FLAGS} $< -o $@
+
