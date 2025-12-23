@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-#include "util_benchmark.h"
-#include <assert.h>
-#include <inttypes.h> // PRId64
+    #include <stdio.h>    // printf()
+    #include <assert.h>
+    #include <inttypes.h> // PRId64
+    #include <algorithm>  // abs()
 
 inline static uint32_t digits10_alexandrescu_v3( uint64_t );
 #define digits10_fixed digits10_alexandrescu_v3
