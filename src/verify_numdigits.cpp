@@ -674,7 +674,6 @@ void verify_int()
         , { numdigits_pohoreski_v3b            , "pohoreski_v3b"             }
         , { numdigits_pohoreski_v4a            , "pohoreski_v4a"             }
         , { numdigits_pohoreski_v4b            , "pohoreski_v4b"             }
-        , { numdigits10_int                    , "reference_int"             }
         , { numdigits_ransom                   , "ransom"                    }
         , { numdigits_simple                   , "simple"                    }
         , { numdigits_thomas                   , "thomas"                    }
