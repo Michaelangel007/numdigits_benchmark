@@ -751,9 +751,11 @@ void verify_u64()
 int main()
 {
     printf( "Verify numdigits()\n" );
-    printf( "sizeof(int)       = %zu bytes\n", sizeof(int)       );
-    printf( "sizeof(long long) = %zu bytes\n", sizeof(long long) );
-    printf( "sizeof( int64_t ) = %zu bytes\n", sizeof( int64_t ) );
+    printf( "    sizeof( int     ) = %zu bytes\n", sizeof( int     ) );
+    printf( "    sizeof( int32   ) = %zu bytes\n", sizeof( int32_t ) );
+    printf( "    sizeof(long long) = %zu bytes\n", sizeof(long long) );
+    printf( "    sizeof( int64_t ) = %zu bytes\n", sizeof( int64_t ) );
+    printf( "    sizeof(uint64_t ) = %zu bytes\n", sizeof(uint64_t ) );
 
     verify_int();
     verify_i64();
