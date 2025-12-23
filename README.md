@@ -112,43 +112,45 @@ Specifically,
 
 # Results
 
-I took the most popular answers, fixed them, wrote a verification utility and benchmark 33 implementations to get actual hard data. Timings show average ns/call and which algorithms are faster compared Andrei's "base" version.
+I took the most popular answers, fixed them, wrote a verification utility and benchmark 35 (!) implementations to get actual hard data. Timings show average ns/call and which algorithms are faster compared Andrei's "base" version. -% faster means the implementation is slower (worse.)
 
 | Algorithm                 |Apple M2           |%Faster |Ryzen 5600X        |%Faster |Threadripper 3960X |%Faster |
 |:--------------------------|------------------:|-------:|------------------:|-------:|------------------:|-------:|
-| alexandrescu_v1           |~ 9.332 avg ns/call|   0.00%|~ 9.780 avg ns/call|   0.00%|~11.678 avg ns/call|   0.00%|
-| alexandrescu_pohoreski_v2 |~ 4.976 avg ns/call|  46.66%|~ 5.430 avg ns/call|  44.47%|~ 6.310 avg ns/call|  45.76%|
-| alexandrescu_pohoreski_v3 |~ 1.371 avg ns/call|  85.30%|~ 2.562 avg ns/call|  73.80%|~ 2.895 avg ns/call|  75.11%|
-| alink_buggy_v1            |~ 6.403 avg ns/call|  31.35%|~ 4.903 avg ns/call|  49.86%|~ 6.094 avg ns/call|  47.62%|
-| alink_buggy_v2            |~ 9.539 avg ns/call|  -2.26%|~ 7.669 avg ns/call|  21.58%|~ 9.446 avg ns/call|  18.81%|
-| alink_fixed_v1a           |~ 5.848 avg ns/call|  37.31%|~ 5.847 avg ns/call|  40.20%|~ 6.822 avg ns/call|  41.36%|
-| alink_fixed_v1b           |~ 5.300 avg ns/call|  43.19%|~ 5.149 avg ns/call|  47.35%|~ 5.873 avg ns/call|  49.52%|
-| alink_fixed_v2a           |~ 7.152 avg ns/call|  23.33%|~ 8.838 avg ns/call|  24.03%|~ 8.838 avg ns/call|  24.03%|
-| alink_fixed_v2b           |~ 5.390 avg ns/call|  42.22%|~ 5.963 avg ns/call|  39.02%|~ 6.970 avg ns/call|  40.09%|
-| clifford_buggy            |~ 0.813 avg ns/call|  91.28%|~ 5.563 avg ns/call|  43.11%|~ 6.057 avg ns/call|  47.93%|
-| clifford_fixed            |~ 3.904 avg ns/call|  58.15%|~ 5.413 avg ns/call|  44.65%|~ 6.001 avg ns/call|  48.42%|
-| dumb_sprintf_strlen       |~49.636 avg ns/call|-432.12%|~56.827 avg ns/call|-481.14%|~89.763 avg ns/call|-671.61%|
-| gabriel_v1a               |~ 2.625 avg ns/call|  71.86%|~ 5.803 avg ns/call|  40.65%|~ 7.487 avg ns/call|  35.64%|
-| gabriel_v1b               |~ 2.825 avg ns/call|  69.71%|~ 3.599 avg ns/call|  63.20%|~ 4.398 avg ns/call|  62.20%|
-| gabriel_v1c               |~ 2.550 avg ns/call|  72.67%|~ 3.435 avg ns/call|  64.87%|~ 4.396 avg ns/call|  62.22%|
-| if_naive                  |~ 5.852 avg ns/call|  37.26%|~ 6.677 avg ns/call|  31.71%|~ 7.516 avg ns/call|  35.39%|
-| microsoft_itoa_strlen     |~10.740 avg ns/call| -15.14%|~28.799 avg ns/call|-194.51%|~51.631 avg ns/call|-343.82%|
-| pohoreski_v1a             |~ 1.869 avg ns/call|  79.97%|~ 6.971 avg ns/call|  28.71%|~ 8.458 avg ns/call|  27.30%|
-| pohoreski_v1b             |~ 2.293 avg ns/call|  75.42%|~ 4.700 avg ns/call|  51.94%|~ 5.379 avg ns/call|  53.76%|
-| pohoreski_v2a             |~ 1.448 avg ns/call|  84.48%|~ 6.727 avg ns/call|  31.20%|~ 8.018 avg ns/call|  31.08%|
-| pohoreski_v2b             |~ 2.293 avg ns/call|  75.41%|~ 4.332 avg ns/call|  55.70%|~ 5.056 avg ns/call|  56.54%|
-| pohoreski_v3a             |~ 1.765 avg ns/call|  81.08%|~ 2.926 avg ns/call|  70.08%|~ 3.506 avg ns/call|  69.86%|
-| pohoreski_v3b             |~ 1.764 avg ns/call|  81.09%|~ 2.940 avg ns/call|  69.94%|~ 3.518 avg ns/call|  69.76%|
-| pohoreski_v4a             |~ 1.944 avg ns/call|  79.16%|~ 8.180 avg ns/call|  16.35%|~ 9.756 avg ns/call|  16.14%|
-| pohoreski_v4b             |~ 1.765 avg ns/call|  81.08%|~ 5.498 avg ns/call|  43.77%|~ 6.833 avg ns/call|  41.27%|
-| ransom                    |~ 4.960 avg ns/call|  46.83%|~ 8.521 avg ns/call|  12.86%|~10.065 avg ns/call|  13.48%|
-| reference_int             |~ 4.940 avg ns/call|  47.04%|~ 4.767 avg ns/call|  51.25%|~ 5.484 avg ns/call|  52.86%|
-| simple                    |~ 0.813 avg ns/call|  91.28%|~ 7.945 avg ns/call|  18.75%|~ 9.406 avg ns/call|  19.14%|
-| thomas                    |~11.763 avg ns/call| -26.11%|~12.819 avg ns/call| -31.10%|~14.860 avg ns/call| -27.74%|
-| user42690_buggy           |~10.987 avg ns/call| -17.78%|~12.523 avg ns/call| -28.06%|~14.429 avg ns/call| -24.03%|
-| user42690_fixed_a         |~13.408 avg ns/call| -43.74%|~14.846 avg ns/call| -51.82%|~17.043 avg ns/call| -46.50%|
-| user42690_fixed_b         |~ 9.358 avg ns/call|  -0.32%|~10.937 avg ns/call| -11.85%|~12.481 avg ns/call|  -7.29%|
-| vitali                    |~ 9.358 avg ns/call|  -0.32%|~ 5.185 avg ns/call|  46.97%|~ 6.153 avg ns/call|  47.11%|
+| alexandrescu_v1           |~ 9.360 avg ns/call|   0.00%|~ 9.780 avg ns/call|   0.00%|~11.536 avg ns/call|   0.00%|
+| alexandrescu_pohoreski_v2 |~ 5.127 avg ns/call|  45.26%|~ 5.430 avg ns/call|  44.47%|~ 6.202 avg ns/call|  46.19%|
+| alexandrescu_pohoreski_v3 |~ 1.375 avg ns/call|  85.32%|~ 2.562 avg ns/call|  73.80%|~ 2.864 avg ns/call|  75.14%|
+| alink_buggy_v1            |~ 6.372 avg ns/call|  31.97%|~ 4.903 avg ns/call|  49.86%|~ 6.024 avg ns/call|  47.73%|
+| alink_buggy_v2            |~ 9.545 avg ns/call|  -1.90%|~ 7.669 avg ns/call|  21.58%|~ 9.333 avg ns/call|  19.01%|
+| alink_fixed_v1a           |~ 5.841 avg ns/call|  37.64%|~ 5.847 avg ns/call|  40.20%|~ 6.751 avg ns/call|  41.42%|
+| alink_fixed_v1b           |~ 5.383 avg ns/call|  42.53%|~ 5.149 avg ns/call|  47.35%|~ 5.835 avg ns/call|  49.37%|
+| alink_fixed_v2a           |~ 7.142 avg ns/call|  23.75%|~ 8.838 avg ns/call|  24.03%|~ 8.720 avg ns/call|  24.34%|
+| alink_fixed_v2b           |~ 5.374 avg ns/call|  42.62%|~ 5.963 avg ns/call|  39.02%|~ 6.904 avg ns/call|  40.09%|
+| clifford_buggy            |~ 0.816 avg ns/call|  91.29%|~ 5.563 avg ns/call|  43.11%|~ 6.014 avg ns/call|  47.82%|
+| clifford_fixed            |~ 3.873 avg ns/call|  58.65%|~ 5.413 avg ns/call|  44.65%|~ 5.967 avg ns/call|  48.22%|
+| dumb_sprintf_strlen       |~48.854 avg ns/call|-421.58%|~56.827 avg ns/call|-481.14%|~87.404 avg ns/call|-658.42%|
+| gabriel_v1a               |~ 2.631 avg ns/call|  71.91%|~ 5.803 avg ns/call|  40.65%|~ 7.464 avg ns/call|  35.23%|
+| gabriel_v1b               |~ 2.833 avg ns/call|  69.75%|~ 3.599 avg ns/call|  63.20%|~ 4.391 avg ns/call|  61.90%|
+| gabriel_v1c               |~ 2.553 avg ns/call|  72.75%|~ 3.435 avg ns/call|  64.87%|~ 4.383 avg ns/call|  61.97%|
+| if_naive                  |~ 5.793 avg ns/call|  38.15%|~ 6.677 avg ns/call|  31.71%|~ 7.480 avg ns/call|  35.10%|
+| microsoft_itoa_strlen     |~10.803 avg ns/call| -15.34%|~28.799 avg ns/call|-194.51%|~51.214 avg ns/call|-344.40%|
+| pohoreski_v1a             |~ 1.871 avg ns/call|  80.02%|~ 6.971 avg ns/call|  28.71%|~ 8.324 avg ns/call|  27.77%|
+| pohoreski_v1b             |~ 2.297 avg ns/call|  75.48%|~ 4.700 avg ns/call|  51.94%|~ 5.327 avg ns/call|  53.78%|
+| pohoreski_v2a             |~ 1.376 avg ns/call|  85.31%|~ 6.727 avg ns/call|  31.20%|~ 7.920 avg ns/call|  31.28%|
+| pohoreski_v2b             |~ 2.294 avg ns/call|  75.51%|~ 4.332 avg ns/call|  55.70%|~ 5.004 avg ns/call|  56.58%|
+| pohoreski_v3a             |~ 1.767 avg ns/call|  81.13%|~ 2.926 avg ns/call|  70.08%|~ 3.468 avg ns/call|  69.91%|
+| pohoreski_v3b             |~ 1.767 avg ns/call|  81.14%|~ 2.940 avg ns/call|  69.94%|~ 3.489 avg ns/call|  69.73%|
+| pohoreski_v4a             |~ 1.940 avg ns/call|  79.29%|~ 8.180 avg ns/call|  16.35%|~ 9.507 avg ns/call|  17.50%|
+| pohoreski_v4b             |~ 1.766 avg ns/call|  81.15%|~ 5.498 avg ns/call|  43.77%|~ 6.631 avg ns/call|  42.46%|
+| ransom                    |~ 4.990 avg ns/call|  46.72%|~ 8.521 avg ns/call|  12.86%|~10.001 avg ns/call|  13.22%|
+| reference_int             |~ 4.945 avg ns/call|  47.20%|~ 4.767 avg ns/call|  51.25%|~ 5.707 avg ns/call|  50.48%|
+| reference_mixed_int       |~ 4.941 avg ns/call|  47.25%|                TBD|    TBD |~ 5.609 avg ns/call|  51.33%|
+| simple                    |~ 0.815 avg ns/call|  91.30%|~ 7.945 avg ns/call|  18.75%|~ 9.412 avg ns/call|  18.33%|
+| simple_reverse            |~ 0.817 avg ns/call|  91.28%|               TBD |    TBD |~10.207 avg ns/call|  11.43%|
+| thomas                    |~11.755 avg ns/call| -25.50%|~12.819 avg ns/call| -31.10%|~14.819 avg ns/call| -28.59%|
+| user42690_buggy           |~10.945 avg ns/call| -16.85%|~12.523 avg ns/call| -28.06%|~14.361 avg ns/call| -24.62%|
+| user42690_fixed_a         |~13.394 avg ns/call| -43.00%|~14.846 avg ns/call| -51.82%|~16.945 avg ns/call| -47.04%|
+| user42690_fixed_b         |~ 9.385 avg ns/call|  -0.20%|~10.937 avg ns/call| -11.85%|~12.351 avg ns/call|  -7.17%|
+| vitali                    |~ 5.103 avg ns/call|  45.52%|~ 5.185 avg ns/call|  46.97%|~ 6.103 avg ns/call|  47.04%|
 
 **NOTES:**
 
@@ -163,43 +165,47 @@ Here we see the weakness of the early Threadripper generations -- poor single-th
 
 |Rank| Algorithm                  |Threadripper 3960X |%Faster |
 |---:|:---------------------------|------------------:|-------:|
-|  1 | alexandrescu_pohoreski_v3  |~ 2.895 avg ns/call|  75.11%|
-|  2 | pohoreski_v3a              |~ 3.506 avg ns/call|  69.86%|
-|  3 | pohoreski_v3b              |~ 3.518 avg ns/call|  69.76%|
-|  4 | gabriel_v1c                |~ 4.396 avg ns/call|  62.22%|
-|  5 | gabriel_v1b                |~ 4.398 avg ns/call|  62.20%|
-|  6 | pohoreski_v2b              |~ 5.056 avg ns/call|  56.54%|
-|  7 | pohoreski_v1b              |~ 5.379 avg ns/call|  53.76%|
-|  8 | reference_int              |~ 5.484 avg ns/call|  52.86%|
-|  9 | alink_fixed_v1b            |~ 5.873 avg ns/call|  49.52%|
-| 10 | clifford_fixed             |~ 6.001 avg ns/call|  48.42%|
-| 11 | clifford_buggy             |~ 6.057 avg ns/call|  47.93%|
-| 12 | alink_buggy_v1             |~ 6.094 avg ns/call|  47.62%|
-| 13 | vitali                     |~ 6.153 avg ns/call|  47.11%|
-| 14 | alexandrescu_pohoreski_v2  |~ 6.310 avg ns/call|  45.76%|
-| 15 | alink_fixed_v1a            |~ 6.822 avg ns/call|  41.36%|
-| 16 | pohoreski_v4b              |~ 6.833 avg ns/call|  41.27%|
-| 17 | alink_fixed_v2b            |~ 6.970 avg ns/call|  40.09%|
-| 18 | gabriel_v1a                |~ 7.487 avg ns/call|  35.64%|
-| 19 | if_naive                   |~ 7.516 avg ns/call|  35.39%|
-| 20 | pohoreski_v2a              |~ 8.018 avg ns/call|  31.08%|
-| 21 | pohoreski_v1a              |~ 8.458 avg ns/call|  27.30%|
-| 22 | alink_fixed_v2a            |~ 8.838 avg ns/call|  24.03%|
-| 23 | simple                     |~ 9.406 avg ns/call|  19.14%|
-| 24 | alink_buggy_v2             |~ 9.446 avg ns/call|  18.81%|
-| 25 | pohoreski_v4a              |~ 9.756 avg ns/call|  16.14%|
-| 26 | ransom                     |~10.065 avg ns/call|  13.48%|
-| 27 | alexandrescu_v1            |~11.678 avg ns/call|   0.00%|
-| 28 | user42690_fixed_b          |~12.481 avg ns/call|  -7.29%|
-| 29 | user42690_buggy            |~14.429 avg ns/call| -24.03%|
-| 30 | thomas                     |~14.860 avg ns/call| -27.74%|
-| 31 | user42690_fixed_a          |~17.043 avg ns/call| -46.50%|
-| 32 | microsoft_itoa_strlen      |~51.631 avg ns/call|-343.82%|
-| 33 | dumb_sprintf_strlen        |~89.763 avg ns/call|-671.61%|
+|  1 | alexandrescu_pohoreski_v3  |~ 2.864 avg ns/call|  75.14%|
+|  2 | pohoreski_v3a              |~ 3.468 avg ns/call|  69.91%|
+|  3 | pohoreski_v3b              |~ 3.489 avg ns/call|  69.73%|
+|  4 | gabriel_v1c                |~ 4.383 avg ns/call|  61.97%|
+|  5 | gabriel_v1b                |~ 4.391 avg ns/call|  61.90%|
+|  6 | pohoreski_v2b              |~ 5.004 avg ns/call|  56.58%|
+|  7 | pohoreski_v1b              |~ 5.327 avg ns/call|  53.78%|
+|  8 | reference_mixed_int        |~ 5.609 avg ns/call|  51.33%|
+|  9 | reference_int              |~ 5.707 avg ns/call|  50.48%|
+| 10 | alink_fixed_v1b            |~ 5.835 avg ns/call|  49.37%|
+| 11 | clifford_fixed             |~ 5.967 avg ns/call|  48.22%|
+| 12 | clifford_buggy             |~ 6.014 avg ns/call|  47.82%|
+| 13 | alink_buggy_v1             |~ 6.024 avg ns/call|  47.73%|
+| 14 | vitali                     |~ 6.103 avg ns/call|  47.04%|
+| 15 | alexandrescu_pohoreski_v2  |~ 6.202 avg ns/call|  46.19%|
+| 16 | pohoreski_v4b              |~ 6.631 avg ns/call|  42.46%|
+| 17 | alink_fixed_v1a            |~ 6.751 avg ns/call|  41.42%|
+| 18 | alink_fixed_v2b            |~ 6.904 avg ns/call|  40.09%|
+| 19 | gabriel_v1a                |~ 7.464 avg ns/call|  35.23%|
+| 20 | if_naive                   |~ 7.480 avg ns/call|  35.10%|
+| 21 | pohoreski_v2a              |~ 7.920 avg ns/call|  31.28%|
+| 22 | pohoreski_v1a              |~ 8.324 avg ns/call|  27.77%|
+| 23 | alink_fixed_v2a            |~ 8.720 avg ns/call|  24.34%|
+| 24 | alink_buggy_v2             |~ 9.333 avg ns/call|  19.01%|
+| 25 | simple                     |~ 9.412 avg ns/call|  18.33%|
+| 26 | pohoreski_v4a              |~ 9.507 avg ns/call|  17.50%|
+| 27 | ransom                     |~10.001 avg ns/call|  13.22%|
+| 28 | simple_reverse             |~10.207 avg ns/call|  11.43%|
+| 29 | alexandrescu_v1            |~11.536 avg ns/call|   0.00%|
+| 30 | user42690_fixed_b          |~12.351 avg ns/call|  -7.17%|
+| 31 | user42690_buggy            |~14.361 avg ns/call| -24.62%|
+| 32 | thomas                     |~14.819 avg ns/call| -28.59%|
+| 33 | user42690_fixed_a          |~16.945 avg ns/call| -47.04%|
+| 34 | microsoft_itoa_strlen      |~51.214 avg ns/call|-344.40%|
+| 35 | dumb_sprintf_strlen        |~87.404 avg ns/call|-658.42%|
 
 ## Windows 10, AMD Ryzen 5600X
 
 Testing 3rd generation Ryzen we see minor disruptions in the middle but nothing too earth shattering.
+
+/!\ **INFO.** The latest 2 tests are missing. Will update later.
 
 |Rank| Algorithm                  |Ryzen 5600X        |%Faster |
 |---:|---------------------------:|------------------:|-------:|
@@ -243,39 +249,41 @@ Apple's M2 Max performance is _very_ interesting to see!
 
 |Rank| Algorithm                  |Apple M2 Max       |%Faster |
 |---:|---------------------------:|------------------:|-------:|
-|  1 | simple                     |~ 0.813 avg ns/call|  91.28%|
-|  2 | clifford_buggy             |~ 0.813 avg ns/call|  91.28%|
-|  3 | alexandrescu_pohoreski_v3  |~ 1.371 avg ns/call|  85.30%|
-|  4 | pohoreski_v2a              |~ 1.448 avg ns/call|  84.48%|
-|  5 | pohoreski_v3b              |~ 1.764 avg ns/call|  81.09%|
-|  6 | pohoreski_v4b              |~ 1.765 avg ns/call|  81.08%|
-|  7 | pohoreski_v3a              |~ 1.765 avg ns/call|  81.08%|
-|  8 | pohoreski_v1a              |~ 1.869 avg ns/call|  79.97%|
-|  9 | pohoreski_v4a              |~ 1.944 avg ns/call|  79.16%|
-| 10 | pohoreski_v2b              |~ 2.293 avg ns/call|  75.41%|
-| 11 | pohoreski_v1b              |~ 2.293 avg ns/call|  75.42%|
-| 12 | gabriel_v1c                |~ 2.550 avg ns/call|  72.67%|
-| 13 | gabriel_v1a                |~ 2.625 avg ns/call|  71.86%|
-| 14 | gabriel_v1b                |~ 2.825 avg ns/call|  69.71%|
-| 15 | clifford_fixed             |~ 3.904 avg ns/call|  58.15%|
-| 16 | reference_int              |~ 4.940 avg ns/call|  47.04%|
-| 17 | ransom                     |~ 4.960 avg ns/call|  46.83%|
-| 18 | alexandrescu_pohoreski_v2  |~ 4.976 avg ns/call|  46.66%|
-| 19 | vitali                     |~ 5.108 avg ns/call|  45.24%|
-| 20 | alink_fixed_v1b            |~ 5.300 avg ns/call|  43.19%|
-| 21 | alink_fixed_v2b            |~ 5.390 avg ns/call|  42.22%|
-| 22 | alink_fixed_v1a            |~ 5.848 avg ns/call|  37.31%|
-| 23 | if_naive                   |~ 5.852 avg ns/call|  37.26%|
-| 24 | alink_buggy_v1             |~ 6.403 avg ns/call|  31.35%|
-| 25 | alink_fixed_v2a            |~ 7.152 avg ns/call|  23.33%|
-| 26 | alexandrescu_v1            |~ 9.332 avg ns/call|   0.00%|
-| 27 | user42690_fixed_b          |~ 9.358 avg ns/call|  -0.32%|
-| 28 | alink_buggy_v2             |~ 9.539 avg ns/call|  -2.26%|
-| 29 | microsoft_itoa_strlen      |~10.740 avg ns/call| -15.14%|
-| 30 | user42690_buggy            |~10.987 avg ns/call| -17.78%|
-| 31 | thomas                     |~11.763 avg ns/call| -26.11%|
-| 32 | user42690_fixed_a          |~13.408 avg ns/call| -43.74%|
-| 33 | dumb_sprintf_strlen        |~49.636 avg ns/call|-432.12%|
+|  1 | simple                     |~ 0.815 avg ns/call|  91.30%|
+|  2 | clifford_buggy             |~ 0.816 avg ns/call|  91.29%|
+|  3 | simple_reverse             |~ 0.817 avg ns/call|  91.28%|
+|  4 | alexandrescu_pohoreski_v3  |~ 1.375 avg ns/call|  85.32%|
+|  5 | pohoreski_v2a              |~ 1.376 avg ns/call|  85.31%|
+|  6 | pohoreski_v3a              |~ 1.767 avg ns/call|  81.13%|
+|  7 | pohoreski_v4b              |~ 1.766 avg ns/call|  81.15%|
+|  8 | pohoreski_v3b              |~ 1.767 avg ns/call|  81.14%|
+|  9 | pohoreski_v1a              |~ 1.871 avg ns/call|  80.02%|
+| 10 | pohoreski_v4a              |~ 1.940 avg ns/call|  79.29%|
+| 11 | pohoreski_v2b              |~ 2.294 avg ns/call|  75.51%|
+| 12 | pohoreski_v1b              |~ 2.297 avg ns/call|  75.48%|
+| 13 | gabriel_v1c                |~ 2.553 avg ns/call|  72.75%|
+| 14 | gabriel_v1a                |~ 2.631 avg ns/call|  71.91%|
+| 15 | gabriel_v1b                |~ 2.833 avg ns/call|  69.75%|
+| 16 | clifford_fixed             |~ 3.873 avg ns/call|  58.65%|
+| 17 | reference_mixed_int        |~ 4.941 avg ns/call|  47.25%|
+| 18 | reference_int              |~ 4.945 avg ns/call|  47.20%|
+| 19 | ransom                     |~ 4.990 avg ns/call|  46.72%|
+| 20 | vitali                     |~ 5.103 avg ns/call|  45.52%|
+| 21 | alexandrescu_pohoreski_v2  |~ 5.127 avg ns/call|  45.26%|
+| 22 | alink_fixed_v2b            |~ 5.374 avg ns/call|  42.62%|
+| 23 | alink_fixed_v1b            |~ 5.383 avg ns/call|  42.53%|
+| 24 | if_naive                   |~ 5.793 avg ns/call|  38.15%|
+| 25 | alink_fixed_v1a            |~ 5.841 avg ns/call|  37.64%|
+| 26 | alink_buggy_v1             |~ 6.372 avg ns/call|  31.97%|
+| 27 | alink_fixed_v2a            |~ 7.142 avg ns/call|  23.75%|
+| 28 | alexandrescu_v1            |~ 9.360 avg ns/call|   0.00%|
+| 29 | user42690_fixed_b          |~ 9.385 avg ns/call|  -0.20%|
+| 30 | alink_buggy_v2             |~ 9.545 avg ns/call|  -1.90%|
+| 31 | microsoft_itoa_strlen      |~10.803 avg ns/call| -15.34%|
+| 32 | user42690_buggy            |~10.945 avg ns/call| -16.85%|
+| 33 | thomas                     |~11.755 avg ns/call| -25.50%|
+| 34 | user42690_fixed_a          |~13.394 avg ns/call| -43.00%|
+| 35 | dumb_sprintf_strlen        |~48.854 avg ns/call|-421.58%|
 
 Fixing the broken implementation of `clifford` takes a huge performance hit. This is WHY it is important to verify your algorithm _works correctly!_
 
@@ -621,4 +629,4 @@ Is this THE fastest `NumDigitsBase10()`? Who knows but if we can optimize someth
 
 This README is Copyleft {C} 2025 Michaelangel007.
 
-Last updated Dec. 22, 2025.
+Last updated Dec. 23, 2025.
