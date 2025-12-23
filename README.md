@@ -602,14 +602,18 @@ To run a "Best of 5" discarding the best case, worst case, and calculating the a
 On Windows:
 
 ```cmd
-.\bin\numdigits_benchmark.exe 5
+.\bin\numdigits_benchmark.exe -markdown 5
 ```
 
 or on macOS / Linux:
 
 ```bash
-./bin/numdigits_benchmark 5
+./bin/numdigits_benchmark -markdown 5
 ```
+
+# Benchmark
+
+Included is a tiny (~400 Lines of Code) single header-only mini-benchmark replacement for Google's [benchmark](https://github.com/google/benchmark).
 
 # Further Research
 
