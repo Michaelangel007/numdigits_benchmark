@@ -327,6 +327,16 @@ namespace benchmark
 
     static Benchmark* Register(Benchmark* benchmark)
     {
+        // Display warning if we are trying to register the same benchmark more than once (could be a typo.)
+        for (Benchmark* bench : RegisteredBenchmarks)
+        {
+            if (benchmark->Func == bench->Func)
+            {
+                printf( "WARNING: Trying to register a duplicate benchmark! Is this intentional?\n"
+                        "         Check for a duplicate BENCHMARK(%s) macro.\n", bench->Name );
+            }
+        }
+
         RegisteredBenchmarks.push_back( benchmark );
         return benchmark;
     }
