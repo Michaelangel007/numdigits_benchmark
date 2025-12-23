@@ -56,41 +56,41 @@ namespace benchmark
 
     struct MetricData
     {
-        double           ElapsedMS; // milli
-        double           ElapsedNS; // nano
-        double           CallerNS;  // nanoseconds per call
+        double           ElapsedMS;  // milli
+        double           ElapsedNS;  // nano
+        double           NSPerCall;  // nanoseconds per call
         double           PercentFaster;
         double           AverageNSPerCall;
         double           AveragePercentFaster;
-        double           FirstCallerNS;
+        double           FirstNSPerCall;
 
         void Reset()
         {
             ElapsedMS            = 0.0;
             ElapsedNS            = 0.0;
-            CallerNS             = 0.0;
+            NSPerCall            = 0.0;
             PercentFaster        = 0.0;
             AverageNSPerCall     = 0.0; // none (yet)
             AveragePercentFaster = 0.0;
-            FirstCallerNS        = 0.0;
+            FirstNSPerCall       = 0.0;
         }
 
-        void Update(double ns, double ooTotalCalls, bool firstCaller, double firstCallerNS)
+        void Update(double ns, double ooTotalCalls, bool isFirstNSPerCall, double firstNSPerCall)
         {
-            ElapsedNS     = ns;
-            ElapsedMS     = ElapsedNS / 1'000'000; // 1 million nanoseconds per 1 millisecond
-            CallerNS      = ElapsedNS * ooTotalCalls;
-            if (firstCaller)
+            ElapsedNS = ns;
+            ElapsedMS = ElapsedNS / 1'000'000; // 1 million nanoseconds per 1 millisecond
+            NSPerCall = ElapsedNS * ooTotalCalls;
+            if (isFirstNSPerCall)
             {
-                PercentFaster = (100.0 * (firstCallerNS - CallerNS)) / firstCallerNS;
-                FirstCallerNS = firstCallerNS;
+                PercentFaster = (100.0 * (firstNSPerCall - NSPerCall)) / firstNSPerCall;
+                FirstNSPerCall = firstNSPerCall;
             }
         }
         void UpdateAverage( double averageNSPerCall, bool firstTest )
         {
             AverageNSPerCall = averageNSPerCall;
             if (!firstTest)
-                AveragePercentFaster = (100.0 * (FirstCallerNS - AverageNSPerCall)) / FirstCallerNS;
+                AveragePercentFaster = (100.0 * (FirstNSPerCall - AverageNSPerCall)) / FirstNSPerCall;
         }
     };
 
@@ -193,13 +193,13 @@ namespace benchmark
                     } while (bench->Passes < bench->MinPasses);
                 auto stop  = std::chrono::high_resolution_clock::now();
 
-                const double ooTotalCalls = 1.0 / ((double)bench->Passes * (double)states.size());
-                const double ns = (double) std::chrono::duration_cast<std::chrono::nanoseconds >(stop - start).count();
-                const bool   firstCaller   = (bench != RegisteredBenchmarks[0]);
-                const double firstCallerNS = RegisteredBenchmarks[0]->Metrics.CallerNS;
-                bench->Metrics.Update( ns, ooTotalCalls, firstCaller, firstCallerNS );
+                const double ooTotalCalls   = 1.0 / ((double)bench->Passes * (double)states.size());
+                const double ns             = (double) std::chrono::duration_cast<std::chrono::nanoseconds >(stop - start).count();
+                const bool   isFirstTest    = (bench != RegisteredBenchmarks[0]);
+                const double firstNSPerCall = RegisteredBenchmarks[0]->Metrics.NSPerCall;
+                bench->Metrics.Update( ns, ooTotalCalls, isFirstTest, firstNSPerCall );
 
-                if (firstCaller)
+                if (isFirstTest)
                 {
                     if (ResultNoOptimize && (FirstNoOptimize != ResultNoOptimize))
                     {
@@ -222,7 +222,7 @@ namespace benchmark
                         printf( " WARNING implementation buggy?");
                     printf( "\n");
                 }
-                printf( "    ns/call: %7.3f ns\n", bench->Metrics.CallerNS       );
+                printf( "    ns/call: %7.3f ns\n", bench->Metrics.NSPerCall      );
                 printf( "    %%faster: %6.2f%%\n", bench->Metrics.PercentFaster  );
             }
 
@@ -266,7 +266,7 @@ namespace benchmark
                     , Separator );
             else
                 printf( "%c%7.3f ns/call%c%7.2f%%%c\n"
-                    , Separator, bench->Metrics.CallerNS
+                    , Separator, bench->Metrics.NSPerCall
                     , Separator, bench->Metrics.PercentFaster
                     , Separator );
         }
@@ -285,7 +285,7 @@ namespace benchmark
                     , Separator );
             else
                 printf( "%c%7.3f ns/call%c%7.2f%%%c\n"
-                    , Separator, bench->Metrics.CallerNS
+                    , Separator, bench->Metrics.NSPerCall
                     , Separator, bench->Metrics.PercentFaster
                     , Separator );
             iRank++;
@@ -312,24 +312,24 @@ namespace benchmark
                 const int iRun = 0;
                 Benchmark*  pBenchmark0 = aRuns[ iRun ][ iTest ];
                 MetricData& tMetrics = pBenchmark0->Metrics;
-                totalCaller.push_back( tMetrics.CallerNS );
-                worstCaller.push_back( tMetrics.CallerNS );
-                bestCaller .push_back( tMetrics.CallerNS );
+                totalCaller.push_back( tMetrics.NSPerCall );
+                worstCaller.push_back( tMetrics.NSPerCall );
+                bestCaller .push_back( tMetrics.NSPerCall );
             }
 
             for (int iTest = 0; iTest < nTests; iTest++ )
             {
-                // We need to pivot the data -- benchmark CallerNS results
+                // We need to pivot the data -- benchmark NSPerCall results
                 for (int iRun = 1; iRun < nRuns; iRun++ )
                 {
                     Benchmark* pBenchmarkI = aRuns[ iRun ][ iTest ];
-                    const double CallerNS = pBenchmarkI->Metrics.CallerNS;
+                    const double NSPerCall = pBenchmarkI->Metrics.NSPerCall;
 
-                    if (worstCaller[ iTest ] < CallerNS)
-                        worstCaller[ iTest ] = CallerNS;
-                    if (bestCaller [ iTest ] > CallerNS)
-                        bestCaller [ iTest ] = CallerNS;
-                    totalCaller[ iTest ] += CallerNS;
+                    if (worstCaller[ iTest ] < NSPerCall)
+                        worstCaller[ iTest ] = NSPerCall;
+                    if (bestCaller [ iTest ] > NSPerCall)
+                        bestCaller [ iTest ] = NSPerCall;
+                    totalCaller[    iTest ] += NSPerCall;
                 }
             }
 
