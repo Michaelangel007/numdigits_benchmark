@@ -2,706 +2,786 @@ Benchmarking numdigits()
 sizeof(int)       = 4 bytes
 sizeof(long long) = 8 bytes
 sizeof( int64_t ) = 8 bytes
-Registered 33 functions...
+Registered 35 functions...
 
 Best of 5
 --- Run 1 of 5 ---
 Running 'bench_numdigits_alexandrescu_v1'...
-    Total: 4689.228 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.378 ns
-    %faster:   0.00%
-Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
-    Total: 2491.129 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.982 ns
-    %faster:  46.88%
-Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
-    Total: 685.519 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.371 ns
-    %faster:  85.38%
-Running 'bench_numdigits_alink_buggy_v1'...
-    Total: 3204.237 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   6.408 ns
-    %faster:  31.67%
-Running 'bench_numdigits_alink_buggy_v2'...
-    Total: 4768.454 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000009 WARNING implementation buggy?
-    ns/call:   9.537 ns
-    %faster:  -1.69%
-Running 'bench_numdigits_alink_fixed_v1a'...
-    Total: 2916.298 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.833 ns
-    %faster:  37.81%
-Running 'bench_numdigits_alink_fixed_v1b'...
-    Total: 2647.681 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.295 ns
-    %faster:  43.54%
-Running 'bench_numdigits_alink_fixed_v2a'...
-    Total: 3604.549 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   7.209 ns
-    %faster:  23.13%
-Running 'bench_numdigits_alink_fixed_v2b'...
-    Total: 2695.467 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.391 ns
-    %faster:  42.52%
-Running 'bench_numdigits_clifford_buggy'...
-    Total: 406.673 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
-    %faster:  91.33%
-Running 'bench_numdigits_clifford_fixed'...
-    Total: 1937.742 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   3.875 ns
-    %faster:  58.68%
-Running 'bench_numdigits_dumb_sprintf_strlen'...
-    Total: 24225.871 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  48.452 ns
-    %faster: -416.63%
-Running 'bench_numdigits_gabriel_v1a'...
-    Total: 1312.338 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.625 ns
-    %faster:  72.01%
-Running 'bench_numdigits_gabriel_v1b'...
-    Total: 1413.540 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.827 ns
-    %faster:  69.86%
-Running 'bench_numdigits_gabriel_v1c'...
-    Total: 1275.305 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.551 ns
-    %faster:  72.80%
-Running 'bench_numdigits_if_naive'...
-    Total: 2928.126 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.856 ns
-    %faster:  37.56%
-Running 'bench_numdigits_microsoft_itoa_strlen'...
-    Total: 5374.572 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.749 ns
-    %faster: -14.62%
-Running 'bench_numdigits_pohoreski_v1a'...
-    Total: 934.850 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.870 ns
-    %faster:  80.06%
-Running 'bench_numdigits_pohoreski_v1b'...
-    Total: 1146.502 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.293 ns
-    %faster:  75.55%
-Running 'bench_numdigits_pohoreski_v2a'...
-    Total: 725.091 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.450 ns
-    %faster:  84.54%
-Running 'bench_numdigits_pohoreski_v2b'...
-    Total: 1147.830 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.296 ns
-    %faster:  75.52%
-Running 'bench_numdigits_pohoreski_v3a'...
-    Total: 883.342 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.767 ns
-    %faster:  81.16%
-Running 'bench_numdigits_pohoreski_v3b'...
-    Total: 881.988 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.764 ns
-    %faster:  81.19%
-Running 'bench_numdigits_pohoreski_v4a'...
-    Total: 971.380 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.943 ns
-    %faster:  79.28%
-Running 'bench_numdigits_pohoreski_v4b'...
-    Total: 882.799 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.766 ns
-    %faster:  81.17%
-Running 'bench_numdigits_ransom'...
-    Total: 2478.918 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.958 ns
-    %faster:  47.14%
-Running 'bench_numdigits_reference_int'...
-    Total: 2471.030 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.942 ns
-    %faster:  47.30%
-Running 'bench_numdigits_simple'...
-    Total: 406.617 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
-    %faster:  91.33%
-Running 'bench_numdigits_thomas'...
-    Total: 5881.730 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  11.763 ns
-    %faster: -25.43%
-Running 'bench_numdigits_user42690_buggy'...
-    Total: 5498.704 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.997 ns
-    %faster: -17.26%
-Running 'bench_numdigits_user42690_fixed_a'...
-    Total: 6722.862 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  13.446 ns
-    %faster: -43.37%
-Running 'bench_numdigits_user42690_fixed_b'...
-    Total: 4679.798 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.360 ns
-    %faster:   0.20%
-Running 'bench_numdigits_vitali'...
-    Total: 2554.052 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.108 ns
-    %faster:  45.53%
---- Run 2 of 5 ---
-Running 'bench_numdigits_alexandrescu_v1'...
-    Total: 4670.583 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.341 ns
-    %faster:   0.00%
-Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
-    Total: 2488.328 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.977 ns
-    %faster:  46.72%
-Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
-    Total: 686.104 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.372 ns
-    %faster:  85.31%
-Running 'bench_numdigits_alink_buggy_v1'...
-    Total: 3198.126 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   6.396 ns
-    %faster:  31.53%
-Running 'bench_numdigits_alink_buggy_v2'...
-    Total: 4770.832 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000009 WARNING implementation buggy?
-    ns/call:   9.542 ns
-    %faster:  -2.15%
-Running 'bench_numdigits_alink_fixed_v1a'...
-    Total: 2925.650 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.851 ns
-    %faster:  37.36%
-Running 'bench_numdigits_alink_fixed_v1b'...
-    Total: 2651.922 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.304 ns
-    %faster:  43.22%
-Running 'bench_numdigits_alink_fixed_v2a'...
-    Total: 3584.433 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   7.169 ns
-    %faster:  23.26%
-Running 'bench_numdigits_alink_fixed_v2b'...
-    Total: 2693.387 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.387 ns
-    %faster:  42.33%
-Running 'bench_numdigits_clifford_buggy'...
-    Total: 406.700 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
-    %faster:  91.29%
-Running 'bench_numdigits_clifford_fixed'...
-    Total: 1936.923 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   3.874 ns
-    %faster:  58.53%
-Running 'bench_numdigits_dumb_sprintf_strlen'...
-    Total: 26642.382 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  53.285 ns
-    %faster: -470.43%
-Running 'bench_numdigits_gabriel_v1a'...
-    Total: 1311.235 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.622 ns
-    %faster:  71.93%
-Running 'bench_numdigits_gabriel_v1b'...
-    Total: 1413.028 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.826 ns
-    %faster:  69.75%
-Running 'bench_numdigits_gabriel_v1c'...
-    Total: 1274.644 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.549 ns
-    %faster:  72.71%
-Running 'bench_numdigits_if_naive'...
-    Total: 2925.852 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.852 ns
-    %faster:  37.36%
-Running 'bench_numdigits_microsoft_itoa_strlen'...
-    Total: 5369.585 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.739 ns
-    %faster: -14.97%
-Running 'bench_numdigits_pohoreski_v1a'...
-    Total: 934.126 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.868 ns
-    %faster:  80.00%
-Running 'bench_numdigits_pohoreski_v1b'...
-    Total: 1145.794 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.292 ns
-    %faster:  75.47%
-Running 'bench_numdigits_pohoreski_v2a'...
-    Total: 721.831 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.444 ns
-    %faster:  84.55%
-Running 'bench_numdigits_pohoreski_v2b'...
-    Total: 1146.650 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.293 ns
-    %faster:  75.45%
-Running 'bench_numdigits_pohoreski_v3a'...
-    Total: 882.347 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.765 ns
-    %faster:  81.11%
-Running 'bench_numdigits_pohoreski_v3b'...
-    Total: 882.236 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.764 ns
-    %faster:  81.11%
-Running 'bench_numdigits_pohoreski_v4a'...
-    Total: 970.275 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.941 ns
-    %faster:  79.23%
-Running 'bench_numdigits_pohoreski_v4b'...
-    Total: 882.293 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.765 ns
-    %faster:  81.11%
-Running 'bench_numdigits_ransom'...
-    Total: 2479.770 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.960 ns
-    %faster:  46.91%
-Running 'bench_numdigits_reference_int'...
-    Total: 2468.954 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.938 ns
-    %faster:  47.14%
-Running 'bench_numdigits_simple'...
-    Total: 406.470 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
-    %faster:  91.30%
-Running 'bench_numdigits_thomas'...
-    Total: 5883.162 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  11.766 ns
-    %faster: -25.96%
-Running 'bench_numdigits_user42690_buggy'...
-    Total: 5492.974 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.986 ns
-    %faster: -17.61%
-Running 'bench_numdigits_user42690_fixed_a'...
-    Total: 6699.872 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  13.400 ns
-    %faster: -43.45%
-Running 'bench_numdigits_user42690_fixed_b'...
-    Total: 4681.381 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.363 ns
-    %faster:  -0.23%
-Running 'bench_numdigits_vitali'...
-    Total: 2551.828 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.104 ns
-    %faster:  45.36%
---- Run 3 of 5 ---
-Running 'bench_numdigits_alexandrescu_v1'...
-    Total: 4662.818 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.326 ns
-    %faster:   0.00%
-Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
-    Total: 2487.262 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.975 ns
-    %faster:  46.66%
-Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
-    Total: 685.320 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.371 ns
-    %faster:  85.30%
-Running 'bench_numdigits_alink_buggy_v1'...
-    Total: 3207.303 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   6.415 ns
-    %faster:  31.22%
-Running 'bench_numdigits_alink_buggy_v2'...
-    Total: 4769.837 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000009 WARNING implementation buggy?
-    ns/call:   9.540 ns
-    %faster:  -2.30%
-Running 'bench_numdigits_alink_fixed_v1a'...
-    Total: 2921.459 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.843 ns
-    %faster:  37.35%
-Running 'bench_numdigits_alink_fixed_v1b'...
-    Total: 2651.485 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.303 ns
-    %faster:  43.14%
-Running 'bench_numdigits_alink_fixed_v2a'...
-    Total: 3592.056 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   7.184 ns
-    %faster:  22.96%
-Running 'bench_numdigits_alink_fixed_v2b'...
-    Total: 2695.056 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.390 ns
-    %faster:  42.20%
-Running 'bench_numdigits_clifford_buggy'...
-    Total: 406.614 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
-    %faster:  91.28%
-Running 'bench_numdigits_clifford_fixed'...
-    Total: 1956.853 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   3.914 ns
-    %faster:  58.03%
-Running 'bench_numdigits_dumb_sprintf_strlen'...
-    Total: 24622.878 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  49.246 ns
-    %faster: -428.07%
-Running 'bench_numdigits_gabriel_v1a'...
-    Total: 1314.121 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.628 ns
-    %faster:  71.82%
-Running 'bench_numdigits_gabriel_v1b'...
-    Total: 1412.809 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.826 ns
-    %faster:  69.70%
-Running 'bench_numdigits_gabriel_v1c'...
-    Total: 1274.508 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.549 ns
-    %faster:  72.67%
-Running 'bench_numdigits_if_naive'...
-    Total: 2926.122 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.852 ns
-    %faster:  37.25%
-Running 'bench_numdigits_microsoft_itoa_strlen'...
-    Total: 5368.455 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.737 ns
-    %faster: -15.13%
-Running 'bench_numdigits_pohoreski_v1a'...
-    Total: 934.223 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.868 ns
-    %faster:  79.96%
-Running 'bench_numdigits_pohoreski_v1b'...
-    Total: 1146.575 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.293 ns
-    %faster:  75.41%
-Running 'bench_numdigits_pohoreski_v2a'...
-    Total: 723.862 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.448 ns
-    %faster:  84.48%
-Running 'bench_numdigits_pohoreski_v2b'...
-    Total: 1146.260 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.293 ns
-    %faster:  75.42%
-Running 'bench_numdigits_pohoreski_v3a'...
-    Total: 882.448 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.765 ns
-    %faster:  81.07%
-Running 'bench_numdigits_pohoreski_v3b'...
-    Total: 882.103 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.764 ns
-    %faster:  81.08%
-Running 'bench_numdigits_pohoreski_v4a'...
-    Total: 969.938 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.940 ns
-    %faster:  79.20%
-Running 'bench_numdigits_pohoreski_v4b'...
-    Total: 882.342 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.765 ns
-    %faster:  81.08%
-Running 'bench_numdigits_ransom'...
-    Total: 2477.287 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.955 ns
-    %faster:  46.87%
-Running 'bench_numdigits_reference_int'...
-    Total: 2469.467 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.939 ns
-    %faster:  47.04%
-Running 'bench_numdigits_simple'...
-    Total: 406.447 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
-    %faster:  91.28%
-Running 'bench_numdigits_thomas'...
-    Total: 5880.016 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  11.760 ns
-    %faster: -26.10%
-Running 'bench_numdigits_user42690_buggy'...
-    Total: 5491.965 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.984 ns
-    %faster: -17.78%
-Running 'bench_numdigits_user42690_fixed_a'...
-    Total: 6703.161 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  13.406 ns
-    %faster: -43.76%
-Running 'bench_numdigits_user42690_fixed_b'...
-    Total: 4677.257 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
+    Total: 4677.540 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
     ns/call:   9.355 ns
-    %faster:  -0.31%
-Running 'bench_numdigits_vitali'...
-    Total: 2553.590 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.107 ns
-    %faster:  45.24%
---- Run 4 of 5 ---
-Running 'bench_numdigits_alexandrescu_v1'...
-    Total: 4662.743 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.325 ns
     %faster:   0.00%
 Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
-    Total: 2487.275 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.975 ns
-    %faster:  46.66%
+    Total: 2563.102 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.126 ns
+    %faster:  45.20%
 Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
-    Total: 685.302 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.371 ns
-    %faster:  85.30%
+    Total: 688.200 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.376 ns
+    %faster:  85.29%
 Running 'bench_numdigits_alink_buggy_v1'...
-    Total: 3202.838 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   6.406 ns
-    %faster:  31.31%
+    Total: 3187.208 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   6.374 ns
+    %faster:  31.86%
 Running 'bench_numdigits_alink_buggy_v2'...
-    Total: 4769.868 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000009 WARNING implementation buggy?
-    ns/call:   9.540 ns
-    %faster:  -2.30%
-Running 'bench_numdigits_alink_fixed_v1a'...
-    Total: 2932.900 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.866 ns
-    %faster:  37.10%
-Running 'bench_numdigits_alink_fixed_v1b'...
-    Total: 2650.186 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.300 ns
-    %faster:  43.16%
-Running 'bench_numdigits_alink_fixed_v2a'...
-    Total: 3534.327 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   7.069 ns
-    %faster:  24.20%
-Running 'bench_numdigits_alink_fixed_v2b'...
-    Total: 2703.307 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.407 ns
-    %faster:  42.02%
-Running 'bench_numdigits_clifford_buggy'...
-    Total: 406.449 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
-    %faster:  91.28%
-Running 'bench_numdigits_clifford_fixed'...
-    Total: 1961.140 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   3.922 ns
-    %faster:  57.94%
-Running 'bench_numdigits_dumb_sprintf_strlen'...
-    Total: 24858.088 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  49.716 ns
-    %faster: -433.12%
-Running 'bench_numdigits_gabriel_v1a'...
-    Total: 1309.803 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.620 ns
-    %faster:  71.91%
-Running 'bench_numdigits_gabriel_v1b'...
-    Total: 1411.609 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.823 ns
-    %faster:  69.73%
-Running 'bench_numdigits_gabriel_v1c'...
-    Total: 1273.542 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.547 ns
-    %faster:  72.69%
-Running 'bench_numdigits_if_naive'...
-    Total: 2922.556 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.845 ns
-    %faster:  37.32%
-Running 'bench_numdigits_microsoft_itoa_strlen'...
-    Total: 5365.948 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.732 ns
-    %faster: -15.08%
-Running 'bench_numdigits_pohoreski_v1a'...
-    Total: 933.570 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.867 ns
-    %faster:  79.98%
-Running 'bench_numdigits_pohoreski_v1b'...
-    Total: 1144.664 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.289 ns
-    %faster:  75.45%
-Running 'bench_numdigits_pohoreski_v2a'...
-    Total: 723.187 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.446 ns
-    %faster:  84.49%
-Running 'bench_numdigits_pohoreski_v2b'...
-    Total: 1145.378 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.291 ns
-    %faster:  75.44%
-Running 'bench_numdigits_pohoreski_v3a'...
-    Total: 881.595 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.763 ns
-    %faster:  81.09%
-Running 'bench_numdigits_pohoreski_v3b'...
-    Total: 884.900 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.770 ns
-    %faster:  81.02%
-Running 'bench_numdigits_pohoreski_v4a'...
-    Total: 983.211 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.966 ns
-    %faster:  78.91%
-Running 'bench_numdigits_pohoreski_v4b'...
-    Total: 887.822 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.776 ns
-    %faster:  80.96%
-Running 'bench_numdigits_ransom'...
-    Total: 2488.599 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.977 ns
-    %faster:  46.63%
-Running 'bench_numdigits_reference_int'...
-    Total: 2477.646 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.955 ns
-    %faster:  46.86%
-Running 'bench_numdigits_simple'...
-    Total: 407.262 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.815 ns
-    %faster:  91.27%
-Running 'bench_numdigits_thomas'...
-    Total: 5906.698 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  11.813 ns
-    %faster: -26.68%
-Running 'bench_numdigits_user42690_buggy'...
-    Total: 5494.539 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.989 ns
-    %faster: -17.84%
-Running 'bench_numdigits_user42690_fixed_a'...
-    Total: 6708.482 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  13.417 ns
-    %faster: -43.87%
-Running 'bench_numdigits_user42690_fixed_b'...
-    Total: 4679.807 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.360 ns
-    %faster:  -0.37%
-Running 'bench_numdigits_vitali'...
-    Total: 2557.290 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.115 ns
-    %faster:  45.15%
---- Run 5 of 5 ---
-Running 'bench_numdigits_alexandrescu_v1'...
-    Total: 4664.011 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.328 ns
-    %faster:   0.00%
-Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
-    Total: 2488.306 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.977 ns
-    %faster:  46.65%
-Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
-    Total: 685.835 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.372 ns
-    %faster:  85.30%
-Running 'bench_numdigits_alink_buggy_v1'...
-    Total: 3197.241 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   6.394 ns
-    %faster:  31.45%
-Running 'bench_numdigits_alink_buggy_v2'...
-    Total: 4761.365 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000009 WARNING implementation buggy?
-    ns/call:   9.523 ns
+    Total: 4775.149 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   9.550 ns
     %faster:  -2.09%
 Running 'bench_numdigits_alink_fixed_v1a'...
-    Total: 2924.477 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.849 ns
-    %faster:  37.30%
+    Total: 2926.891 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.854 ns
+    %faster:  37.43%
 Running 'bench_numdigits_alink_fixed_v1b'...
-    Total: 2647.039 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.294 ns
-    %faster:  43.25%
+    Total: 2689.345 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.379 ns
+    %faster:  42.51%
 Running 'bench_numdigits_alink_fixed_v2a'...
-    Total: 3550.879 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   7.102 ns
-    %faster:  23.87%
+    Total: 3568.990 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   7.138 ns
+    %faster:  23.70%
 Running 'bench_numdigits_alink_fixed_v2b'...
-    Total: 2693.764 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.388 ns
-    %faster:  42.24%
+    Total: 2689.664 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.379 ns
+    %faster:  42.50%
 Running 'bench_numdigits_clifford_buggy'...
-    Total: 406.441 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
-    %faster:  91.29%
+    Total: 408.352 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.817 ns
+    %faster:  91.27%
 Running 'bench_numdigits_clifford_fixed'...
-    Total: 1988.071 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   3.976 ns
-    %faster:  57.37%
+    Total: 1936.667 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   3.873 ns
+    %faster:  58.60%
 Running 'bench_numdigits_dumb_sprintf_strlen'...
-    Total: 24972.963 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  49.946 ns
-    %faster: -435.44%
+    Total: 24329.731 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  48.659 ns
+    %faster: -420.14%
 Running 'bench_numdigits_gabriel_v1a'...
-    Total: 1313.951 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.628 ns
-    %faster:  71.83%
+    Total: 1317.187 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.634 ns
+    %faster:  71.84%
 Running 'bench_numdigits_gabriel_v1b'...
-    Total: 1412.150 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.824 ns
-    %faster:  69.72%
+    Total: 1416.952 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.834 ns
+    %faster:  69.71%
 Running 'bench_numdigits_gabriel_v1c'...
-    Total: 1278.999 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.558 ns
-    %faster:  72.58%
+    Total: 1276.180 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.552 ns
+    %faster:  72.72%
 Running 'bench_numdigits_if_naive'...
-    Total: 2925.956 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.852 ns
-    %faster:  37.27%
+    Total: 2896.915 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.794 ns
+    %faster:  38.07%
 Running 'bench_numdigits_microsoft_itoa_strlen'...
-    Total: 5372.448 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.745 ns
-    %faster: -15.19%
+    Total: 5367.663 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  10.735 ns
+    %faster: -14.75%
 Running 'bench_numdigits_pohoreski_v1a'...
-    Total: 934.556 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.869 ns
-    %faster:  79.96%
+    Total: 936.053 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.872 ns
+    %faster:  79.99%
 Running 'bench_numdigits_pohoreski_v1b'...
-    Total: 1147.146 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   2.294 ns
-    %faster:  75.40%
+    Total: 1148.567 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.297 ns
+    %faster:  75.45%
 Running 'bench_numdigits_pohoreski_v2a'...
-    Total: 725.254 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.451 ns
-    %faster:  84.45%
+    Total: 688.134 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.376 ns
+    %faster:  85.29%
 Running 'bench_numdigits_pohoreski_v2b'...
-    Total: 1147.037 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
+    Total: 1146.938 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
     ns/call:   2.294 ns
-    %faster:  75.41%
+    %faster:  75.48%
 Running 'bench_numdigits_pohoreski_v3a'...
-    Total: 882.560 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.765 ns
-    %faster:  81.08%
+    Total: 883.719 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.767 ns
+    %faster:  81.11%
 Running 'bench_numdigits_pohoreski_v3b'...
-    Total: 881.551 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.763 ns
-    %faster:  81.10%
+    Total: 885.358 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.771 ns
+    %faster:  81.07%
 Running 'bench_numdigits_pohoreski_v4a'...
-    Total: 974.064 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.948 ns
-    %faster:  79.12%
+    Total: 975.503 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.951 ns
+    %faster:  79.14%
 Running 'bench_numdigits_pohoreski_v4b'...
-    Total: 882.452 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   1.765 ns
+    Total: 884.988 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.770 ns
     %faster:  81.08%
 Running 'bench_numdigits_ransom'...
-    Total: 2481.208 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.962 ns
-    %faster:  46.80%
+    Total: 2493.169 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.986 ns
+    %faster:  46.70%
 Running 'bench_numdigits_reference_int'...
-    Total: 2469.838 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   4.940 ns
-    %faster:  47.04%
+    Total: 2473.574 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.947 ns
+    %faster:  47.12%
+Running 'bench_numdigits_reference_mixed_int'...
+    Total: 2470.300 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.941 ns
+    %faster:  47.19%
 Running 'bench_numdigits_simple'...
-    Total: 406.440 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   0.813 ns
+    Total: 407.587 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.815 ns
     %faster:  91.29%
+Running 'bench_numdigits_simple_reverse'...
+    Total: 408.013 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.816 ns
+    %faster:  91.28%
 Running 'bench_numdigits_thomas'...
-    Total: 5877.726 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  11.755 ns
-    %faster: -26.02%
+    Total: 5876.737 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  11.753 ns
+    %faster: -25.64%
 Running 'bench_numdigits_user42690_buggy'...
-    Total: 5492.768 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  10.986 ns
-    %faster: -17.77%
+    Total: 5496.931 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a WARNING implementation buggy?
+    ns/call:  10.994 ns
+    %faster: -17.52%
 Running 'bench_numdigits_user42690_fixed_a'...
-    Total: 6698.610 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:  13.397 ns
-    %faster: -43.62%
+    Total: 6709.465 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  13.419 ns
+    %faster: -43.44%
 Running 'bench_numdigits_user42690_fixed_b'...
-    Total: 4677.561 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   9.355 ns
-    %faster:  -0.29%
+    Total: 4691.985 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.384 ns
+    %faster:  -0.31%
 Running 'bench_numdigits_vitali'...
-    Total: 2555.085 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a
-    ns/call:   5.110 ns
-    %faster:  45.22%
+    Total: 2551.005 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.102 ns
+    %faster:  45.46%
+--- Run 2 of 5 ---
+Running 'bench_numdigits_alexandrescu_v1'...
+    Total: 4670.949 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.342 ns
+    %faster:   0.00%
+Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
+    Total: 2564.204 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.128 ns
+    %faster:  45.10%
+Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
+    Total: 687.549 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.375 ns
+    %faster:  85.28%
+Running 'bench_numdigits_alink_buggy_v1'...
+    Total: 3187.396 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   6.375 ns
+    %faster:  31.76%
+Running 'bench_numdigits_alink_buggy_v2'...
+    Total: 4772.198 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   9.544 ns
+    %faster:  -2.17%
+Running 'bench_numdigits_alink_fixed_v1a'...
+    Total: 2916.396 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.833 ns
+    %faster:  37.56%
+Running 'bench_numdigits_alink_fixed_v1b'...
+    Total: 2696.602 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.393 ns
+    %faster:  42.27%
+Running 'bench_numdigits_alink_fixed_v2a'...
+    Total: 3588.336 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   7.177 ns
+    %faster:  23.18%
+Running 'bench_numdigits_alink_fixed_v2b'...
+    Total: 2687.245 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.374 ns
+    %faster:  42.47%
+Running 'bench_numdigits_clifford_buggy'...
+    Total: 408.052 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.816 ns
+    %faster:  91.26%
+Running 'bench_numdigits_clifford_fixed'...
+    Total: 1937.399 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   3.875 ns
+    %faster:  58.52%
+Running 'bench_numdigits_dumb_sprintf_strlen'...
+    Total: 24321.470 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  48.643 ns
+    %faster: -420.70%
+Running 'bench_numdigits_gabriel_v1a'...
+    Total: 1316.189 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.632 ns
+    %faster:  71.82%
+Running 'bench_numdigits_gabriel_v1b'...
+    Total: 1417.122 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.834 ns
+    %faster:  69.66%
+Running 'bench_numdigits_gabriel_v1c'...
+    Total: 1277.103 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.554 ns
+    %faster:  72.66%
+Running 'bench_numdigits_if_naive'...
+    Total: 2900.101 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.800 ns
+    %faster:  37.91%
+Running 'bench_numdigits_microsoft_itoa_strlen'...
+    Total: 5391.099 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  10.782 ns
+    %faster: -15.42%
+Running 'bench_numdigits_pohoreski_v1a'...
+    Total: 934.968 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.870 ns
+    %faster:  79.98%
+Running 'bench_numdigits_pohoreski_v1b'...
+    Total: 1148.079 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.296 ns
+    %faster:  75.42%
+Running 'bench_numdigits_pohoreski_v2a'...
+    Total: 688.850 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.378 ns
+    %faster:  85.25%
+Running 'bench_numdigits_pohoreski_v2b'...
+    Total: 1146.848 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.294 ns
+    %faster:  75.45%
+Running 'bench_numdigits_pohoreski_v3a'...
+    Total: 883.846 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.768 ns
+    %faster:  81.08%
+Running 'bench_numdigits_pohoreski_v3b'...
+    Total: 883.397 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.767 ns
+    %faster:  81.09%
+Running 'bench_numdigits_pohoreski_v4a'...
+    Total: 971.749 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.943 ns
+    %faster:  79.20%
+Running 'bench_numdigits_pohoreski_v4b'...
+    Total: 883.086 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.766 ns
+    %faster:  81.09%
+Running 'bench_numdigits_ransom'...
+    Total: 2496.256 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.993 ns
+    %faster:  46.56%
+Running 'bench_numdigits_reference_int'...
+    Total: 2474.486 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.949 ns
+    %faster:  47.02%
+Running 'bench_numdigits_reference_mixed_int'...
+    Total: 2470.786 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.942 ns
+    %faster:  47.10%
+Running 'bench_numdigits_simple'...
+    Total: 407.716 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.815 ns
+    %faster:  91.27%
+Running 'bench_numdigits_simple_reverse'...
+    Total: 408.777 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.818 ns
+    %faster:  91.25%
+Running 'bench_numdigits_thomas'...
+    Total: 5879.801 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  11.760 ns
+    %faster: -25.88%
+Running 'bench_numdigits_user42690_buggy'...
+    Total: 5473.676 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a WARNING implementation buggy?
+    ns/call:  10.947 ns
+    %faster: -17.19%
+Running 'bench_numdigits_user42690_fixed_a'...
+    Total: 6692.035 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  13.384 ns
+    %faster: -43.27%
+Running 'bench_numdigits_user42690_fixed_b'...
+    Total: 4692.321 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.385 ns
+    %faster:  -0.46%
+Running 'bench_numdigits_vitali'...
+    Total: 2554.184 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.108 ns
+    %faster:  45.32%
+--- Run 3 of 5 ---
+Running 'bench_numdigits_alexandrescu_v1'...
+    Total: 4681.469 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.363 ns
+    %faster:   0.00%
+Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
+    Total: 2563.500 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.127 ns
+    %faster:  45.24%
+Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
+    Total: 690.193 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.380 ns
+    %faster:  85.26%
+Running 'bench_numdigits_alink_buggy_v1'...
+    Total: 3185.024 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   6.370 ns
+    %faster:  31.97%
+Running 'bench_numdigits_alink_buggy_v2'...
+    Total: 4773.058 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   9.546 ns
+    %faster:  -1.96%
+Running 'bench_numdigits_alink_fixed_v1a'...
+    Total: 2920.899 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.842 ns
+    %faster:  37.61%
+Running 'bench_numdigits_alink_fixed_v1b'...
+    Total: 2691.308 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.383 ns
+    %faster:  42.51%
+Running 'bench_numdigits_alink_fixed_v2a'...
+    Total: 3555.739 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   7.111 ns
+    %faster:  24.05%
+Running 'bench_numdigits_alink_fixed_v2b'...
+    Total: 2684.776 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.370 ns
+    %faster:  42.65%
+Running 'bench_numdigits_clifford_buggy'...
+    Total: 408.001 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.816 ns
+    %faster:  91.28%
+Running 'bench_numdigits_clifford_fixed'...
+    Total: 1935.864 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   3.872 ns
+    %faster:  58.65%
+Running 'bench_numdigits_dumb_sprintf_strlen'...
+    Total: 24356.301 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  48.713 ns
+    %faster: -420.27%
+Running 'bench_numdigits_gabriel_v1a'...
+    Total: 1313.824 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.628 ns
+    %faster:  71.94%
+Running 'bench_numdigits_gabriel_v1b'...
+    Total: 1414.277 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.829 ns
+    %faster:  69.79%
+Running 'bench_numdigits_gabriel_v1c'...
+    Total: 1275.894 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.552 ns
+    %faster:  72.75%
+Running 'bench_numdigits_if_naive'...
+    Total: 2892.452 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.785 ns
+    %faster:  38.21%
+Running 'bench_numdigits_microsoft_itoa_strlen'...
+    Total: 5483.093 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  10.966 ns
+    %faster: -17.12%
+Running 'bench_numdigits_pohoreski_v1a'...
+    Total: 936.312 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.873 ns
+    %faster:  80.00%
+Running 'bench_numdigits_pohoreski_v1b'...
+    Total: 1149.800 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.300 ns
+    %faster:  75.44%
+Running 'bench_numdigits_pohoreski_v2a'...
+    Total: 688.312 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.377 ns
+    %faster:  85.30%
+Running 'bench_numdigits_pohoreski_v2b'...
+    Total: 1147.667 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.295 ns
+    %faster:  75.48%
+Running 'bench_numdigits_pohoreski_v3a'...
+    Total: 883.171 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.766 ns
+    %faster:  81.13%
+Running 'bench_numdigits_pohoreski_v3b'...
+    Total: 881.407 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.763 ns
+    %faster:  81.17%
+Running 'bench_numdigits_pohoreski_v4a'...
+    Total: 967.471 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.935 ns
+    %faster:  79.33%
+Running 'bench_numdigits_pohoreski_v4b'...
+    Total: 880.973 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.762 ns
+    %faster:  81.18%
+Running 'bench_numdigits_ransom'...
+    Total: 2635.365 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.271 ns
+    %faster:  43.71%
+Running 'bench_numdigits_reference_int'...
+    Total: 2472.040 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.944 ns
+    %faster:  47.20%
+Running 'bench_numdigits_reference_mixed_int'...
+    Total: 2470.802 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.942 ns
+    %faster:  47.22%
+Running 'bench_numdigits_simple'...
+    Total: 407.603 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.815 ns
+    %faster:  91.29%
+Running 'bench_numdigits_simple_reverse'...
+    Total: 408.530 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.817 ns
+    %faster:  91.27%
+Running 'bench_numdigits_thomas'...
+    Total: 5885.345 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  11.771 ns
+    %faster: -25.72%
+Running 'bench_numdigits_user42690_buggy'...
+    Total: 5468.880 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a WARNING implementation buggy?
+    ns/call:  10.938 ns
+    %faster: -16.82%
+Running 'bench_numdigits_user42690_fixed_a'...
+    Total: 6706.172 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  13.412 ns
+    %faster: -43.25%
+Running 'bench_numdigits_user42690_fixed_b'...
+    Total: 4692.030 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.384 ns
+    %faster:  -0.23%
+Running 'bench_numdigits_vitali'...
+    Total: 2552.541 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.105 ns
+    %faster:  45.48%
+--- Run 4 of 5 ---
+Running 'bench_numdigits_alexandrescu_v1'...
+    Total: 4681.653 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.363 ns
+    %faster:   0.00%
+Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
+    Total: 2563.059 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.126 ns
+    %faster:  45.25%
+Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
+    Total: 687.370 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.375 ns
+    %faster:  85.32%
+Running 'bench_numdigits_alink_buggy_v1'...
+    Total: 3186.464 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   6.373 ns
+    %faster:  31.94%
+Running 'bench_numdigits_alink_buggy_v2'...
+    Total: 4746.528 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   9.493 ns
+    %faster:  -1.39%
+Running 'bench_numdigits_alink_fixed_v1a'...
+    Total: 2913.725 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.827 ns
+    %faster:  37.76%
+Running 'bench_numdigits_alink_fixed_v1b'...
+    Total: 2692.540 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.385 ns
+    %faster:  42.49%
+Running 'bench_numdigits_alink_fixed_v2a'...
+    Total: 3511.039 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   7.022 ns
+    %faster:  25.00%
+Running 'bench_numdigits_alink_fixed_v2b'...
+    Total: 2691.351 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.383 ns
+    %faster:  42.51%
+Running 'bench_numdigits_clifford_buggy'...
+    Total: 406.602 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.813 ns
+    %faster:  91.31%
+Running 'bench_numdigits_clifford_fixed'...
+    Total: 1933.739 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   3.867 ns
+    %faster:  58.70%
+Running 'bench_numdigits_dumb_sprintf_strlen'...
+    Total: 24594.647 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  49.189 ns
+    %faster: -425.34%
+Running 'bench_numdigits_gabriel_v1a'...
+    Total: 1312.509 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.625 ns
+    %faster:  71.96%
+Running 'bench_numdigits_gabriel_v1b'...
+    Total: 1416.157 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.832 ns
+    %faster:  69.75%
+Running 'bench_numdigits_gabriel_v1c'...
+    Total: 1274.948 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.550 ns
+    %faster:  72.77%
+Running 'bench_numdigits_if_naive'...
+    Total: 2888.508 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.777 ns
+    %faster:  38.30%
+Running 'bench_numdigits_microsoft_itoa_strlen'...
+    Total: 5402.543 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  10.805 ns
+    %faster: -15.40%
+Running 'bench_numdigits_pohoreski_v1a'...
+    Total: 933.428 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.867 ns
+    %faster:  80.06%
+Running 'bench_numdigits_pohoreski_v1b'...
+    Total: 1145.116 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.290 ns
+    %faster:  75.54%
+Running 'bench_numdigits_pohoreski_v2a'...
+    Total: 687.119 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.374 ns
+    %faster:  85.32%
+Running 'bench_numdigits_pohoreski_v2b'...
+    Total: 1143.824 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.288 ns
+    %faster:  75.57%
+Running 'bench_numdigits_pohoreski_v3a'...
+    Total: 881.445 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.763 ns
+    %faster:  81.17%
+Running 'bench_numdigits_pohoreski_v3b'...
+    Total: 881.360 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.763 ns
+    %faster:  81.17%
+Running 'bench_numdigits_pohoreski_v4a'...
+    Total: 967.912 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.936 ns
+    %faster:  79.33%
+Running 'bench_numdigits_pohoreski_v4b'...
+    Total: 880.842 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.762 ns
+    %faster:  81.19%
+Running 'bench_numdigits_ransom'...
+    Total: 2489.481 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.979 ns
+    %faster:  46.82%
+Running 'bench_numdigits_reference_int'...
+    Total: 2469.688 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.939 ns
+    %faster:  47.25%
+Running 'bench_numdigits_reference_mixed_int'...
+    Total: 2466.683 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.933 ns
+    %faster:  47.31%
+Running 'bench_numdigits_simple'...
+    Total: 406.461 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.813 ns
+    %faster:  91.32%
+Running 'bench_numdigits_simple_reverse'...
+    Total: 406.674 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.813 ns
+    %faster:  91.31%
+Running 'bench_numdigits_thomas'...
+    Total: 5872.875 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  11.746 ns
+    %faster: -25.44%
+Running 'bench_numdigits_user42690_buggy'...
+    Total: 5468.133 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a WARNING implementation buggy?
+    ns/call:  10.936 ns
+    %faster: -16.80%
+Running 'bench_numdigits_user42690_fixed_a'...
+    Total: 6692.212 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  13.384 ns
+    %faster: -42.95%
+Running 'bench_numdigits_user42690_fixed_b'...
+    Total: 4693.950 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.388 ns
+    %faster:  -0.26%
+Running 'bench_numdigits_vitali'...
+    Total: 2550.568 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.101 ns
+    %faster:  45.52%
+--- Run 5 of 5 ---
+Running 'bench_numdigits_alexandrescu_v1'...
+    Total: 4683.290 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.367 ns
+    %faster:   0.00%
+Running 'bench_numdigits_alexandrescu_pohoreski_v2'...
+    Total: 2563.943 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.128 ns
+    %faster:  45.25%
+Running 'bench_numdigits_alexandrescu_pohoreski_v3'...
+    Total: 687.108 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.374 ns
+    %faster:  85.33%
+Running 'bench_numdigits_alink_buggy_v1'...
+    Total: 3184.708 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   6.369 ns
+    %faster:  32.00%
+Running 'bench_numdigits_alink_buggy_v2'...
+    Total: 4771.781 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x000001 WARNING implementation buggy?
+    ns/call:   9.544 ns
+    %faster:  -1.89%
+Running 'bench_numdigits_alink_fixed_v1a'...
+    Total: 2923.920 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.848 ns
+    %faster:  37.57%
+Running 'bench_numdigits_alink_fixed_v1b'...
+    Total: 2690.931 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.382 ns
+    %faster:  42.54%
+Running 'bench_numdigits_alink_fixed_v2a'...
+    Total: 3588.579 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   7.177 ns
+    %faster:  23.37%
+Running 'bench_numdigits_alink_fixed_v2b'...
+    Total: 2679.655 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.359 ns
+    %faster:  42.78%
+Running 'bench_numdigits_clifford_buggy'...
+    Total: 407.813 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.816 ns
+    %faster:  91.29%
+Running 'bench_numdigits_clifford_fixed'...
+    Total: 1937.534 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   3.875 ns
+    %faster:  58.63%
+Running 'bench_numdigits_dumb_sprintf_strlen'...
+    Total: 24681.319 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  49.363 ns
+    %faster: -427.01%
+Running 'bench_numdigits_gabriel_v1a'...
+    Total: 1330.801 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.662 ns
+    %faster:  71.58%
+Running 'bench_numdigits_gabriel_v1b'...
+    Total: 1443.512 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.887 ns
+    %faster:  69.18%
+Running 'bench_numdigits_gabriel_v1c'...
+    Total: 1293.850 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.588 ns
+    %faster:  72.37%
+Running 'bench_numdigits_if_naive'...
+    Total: 2911.538 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.823 ns
+    %faster:  37.83%
+Running 'bench_numdigits_microsoft_itoa_strlen'...
+    Total: 5410.911 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  10.822 ns
+    %faster: -15.54%
+Running 'bench_numdigits_pohoreski_v1a'...
+    Total: 935.484 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.871 ns
+    %faster:  80.03%
+Running 'bench_numdigits_pohoreski_v1b'...
+    Total: 1149.051 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.298 ns
+    %faster:  75.46%
+Running 'bench_numdigits_pohoreski_v2a'...
+    Total: 687.644 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.375 ns
+    %faster:  85.32%
+Running 'bench_numdigits_pohoreski_v2b'...
+    Total: 1146.876 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   2.294 ns
+    %faster:  75.51%
+Running 'bench_numdigits_pohoreski_v3a'...
+    Total: 883.691 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.767 ns
+    %faster:  81.13%
+Running 'bench_numdigits_pohoreski_v3b'...
+    Total: 885.136 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.770 ns
+    %faster:  81.10%
+Running 'bench_numdigits_pohoreski_v4a'...
+    Total: 969.833 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.940 ns
+    %faster:  79.29%
+Running 'bench_numdigits_pohoreski_v4b'...
+    Total: 884.820 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   1.770 ns
+    %faster:  81.11%
+Running 'bench_numdigits_ransom'...
+    Total: 2495.726 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.991 ns
+    %faster:  46.71%
+Running 'bench_numdigits_reference_int'...
+    Total: 2472.277 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.945 ns
+    %faster:  47.21%
+Running 'bench_numdigits_reference_mixed_int'...
+    Total: 2469.789 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   4.940 ns
+    %faster:  47.26%
+Running 'bench_numdigits_simple'...
+    Total: 407.043 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.814 ns
+    %faster:  91.31%
+Running 'bench_numdigits_simple_reverse'...
+    Total: 408.483 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   0.817 ns
+    %faster:  91.28%
+Running 'bench_numdigits_thomas'...
+    Total: 5876.151 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  11.752 ns
+    %faster: -25.47%
+Running 'bench_numdigits_user42690_buggy'...
+    Total: 5475.004 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000a WARNING implementation buggy?
+    ns/call:  10.950 ns
+    %faster: -16.91%
+Running 'bench_numdigits_user42690_fixed_a'...
+    Total: 6692.975 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:  13.386 ns
+    %faster: -42.91%
+Running 'bench_numdigits_user42690_fixed_b'...
+    Total: 4693.414 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   9.387 ns
+    %faster:  -0.22%
+Running 'bench_numdigits_vitali'...
+    Total: 2549.885 ms, Passes: 500, Pass Size: 1000000  ForceOpt0: 0x00000b
+    ns/call:   5.100 ns
+    %faster:  45.55%
+
+=== Summary (In order of appearance) ===
+bench_numdigits_alexandrescu_v1            ~  9.360 avg ns/call     0.00%
+bench_numdigits_alexandrescu_pohoreski_v2  ~  5.127 avg ns/call    45.26%
+bench_numdigits_alexandrescu_pohoreski_v3  ~  1.375 avg ns/call    85.32%
+bench_numdigits_alink_buggy_v1             ~  6.372 avg ns/call    31.97%
+bench_numdigits_alink_buggy_v2             ~  9.545 avg ns/call    -1.90%
+bench_numdigits_alink_fixed_v1a            ~  5.841 avg ns/call    37.64%
+bench_numdigits_alink_fixed_v1b            ~  5.383 avg ns/call    42.53%
+bench_numdigits_alink_fixed_v2a            ~  7.142 avg ns/call    23.75%
+bench_numdigits_alink_fixed_v2b            ~  5.374 avg ns/call    42.62%
+bench_numdigits_clifford_buggy             ~  0.816 avg ns/call    91.29%
+bench_numdigits_clifford_fixed             ~  3.873 avg ns/call    58.65%
+bench_numdigits_dumb_sprintf_strlen        ~ 48.854 avg ns/call  -421.58%
+bench_numdigits_gabriel_v1a                ~  2.631 avg ns/call    71.91%
+bench_numdigits_gabriel_v1b                ~  2.833 avg ns/call    69.75%
+bench_numdigits_gabriel_v1c                ~  2.553 avg ns/call    72.75%
+bench_numdigits_if_naive                   ~  5.793 avg ns/call    38.15%
+bench_numdigits_microsoft_itoa_strlen      ~ 10.803 avg ns/call   -15.34%
+bench_numdigits_pohoreski_v1a              ~  1.871 avg ns/call    80.02%
+bench_numdigits_pohoreski_v1b              ~  2.297 avg ns/call    75.48%
+bench_numdigits_pohoreski_v2a              ~  1.376 avg ns/call    85.31%
+bench_numdigits_pohoreski_v2b              ~  2.294 avg ns/call    75.51%
+bench_numdigits_pohoreski_v3a              ~  1.767 avg ns/call    81.13%
+bench_numdigits_pohoreski_v3b              ~  1.767 avg ns/call    81.14%
+bench_numdigits_pohoreski_v4a              ~  1.940 avg ns/call    79.29%
+bench_numdigits_pohoreski_v4b              ~  1.766 avg ns/call    81.15%
+bench_numdigits_ransom                     ~  4.990 avg ns/call    46.72%
+bench_numdigits_reference_int              ~  4.945 avg ns/call    47.20%
+bench_numdigits_reference_mixed_int        ~  4.941 avg ns/call    47.25%
+bench_numdigits_simple                     ~  0.815 avg ns/call    91.30%
+bench_numdigits_simple_reverse             ~  0.817 avg ns/call    91.28%
+bench_numdigits_thomas                     ~ 11.755 avg ns/call   -25.50%
+bench_numdigits_user42690_buggy            ~ 10.945 avg ns/call   -16.85%
+bench_numdigits_user42690_fixed_a          ~ 13.394 avg ns/call   -43.00%
+bench_numdigits_user42690_fixed_b          ~  9.385 avg ns/call    -0.20%
+bench_numdigits_vitali                     ~  5.103 avg ns/call    45.52%
 
 === Summary (Best to Worst) ===
-bench_numdigits_simple                     ~  0.813 avg ns/call    91.28%
-bench_numdigits_clifford_buggy             ~  0.813 avg ns/call    91.28%
-bench_numdigits_alexandrescu_pohoreski_v3  ~  1.371 avg ns/call    85.30%
-bench_numdigits_pohoreski_v2a              ~  1.448 avg ns/call    84.48%
-bench_numdigits_pohoreski_v3b              ~  1.764 avg ns/call    81.09%
-bench_numdigits_pohoreski_v4b              ~  1.765 avg ns/call    81.08%
-bench_numdigits_pohoreski_v3a              ~  1.765 avg ns/call    81.08%
-bench_numdigits_pohoreski_v1a              ~  1.869 avg ns/call    79.97%
-bench_numdigits_pohoreski_v4a              ~  1.944 avg ns/call    79.16%
-bench_numdigits_pohoreski_v2b              ~  2.293 avg ns/call    75.41%
-bench_numdigits_pohoreski_v1b              ~  2.293 avg ns/call    75.42%
-bench_numdigits_gabriel_v1c                ~  2.550 avg ns/call    72.67%
-bench_numdigits_gabriel_v1a                ~  2.625 avg ns/call    71.86%
-bench_numdigits_gabriel_v1b                ~  2.825 avg ns/call    69.71%
-bench_numdigits_clifford_fixed             ~  3.904 avg ns/call    58.15%
-bench_numdigits_reference_int              ~  4.940 avg ns/call    47.04%
-bench_numdigits_ransom                     ~  4.960 avg ns/call    46.83%
-bench_numdigits_alexandrescu_pohoreski_v2  ~  4.976 avg ns/call    46.66%
-bench_numdigits_vitali                     ~  5.108 avg ns/call    45.24%
-bench_numdigits_alink_fixed_v1b            ~  5.300 avg ns/call    43.19%
-bench_numdigits_alink_fixed_v2b            ~  5.390 avg ns/call    42.22%
-bench_numdigits_alink_fixed_v1a            ~  5.848 avg ns/call    37.31%
-bench_numdigits_if_naive                   ~  5.852 avg ns/call    37.26%
-bench_numdigits_alink_buggy_v1             ~  6.403 avg ns/call    31.35%
-bench_numdigits_alink_fixed_v2a            ~  7.152 avg ns/call    23.33%
-bench_numdigits_alexandrescu_v1            ~  9.332 avg ns/call     0.00%
-bench_numdigits_user42690_fixed_b          ~  9.358 avg ns/call    -0.32%
-bench_numdigits_alink_buggy_v2             ~  9.539 avg ns/call    -2.26%
-bench_numdigits_microsoft_itoa_strlen      ~ 10.740 avg ns/call   -15.14%
-bench_numdigits_user42690_buggy            ~ 10.987 avg ns/call   -17.78%
-bench_numdigits_thomas                     ~ 11.763 avg ns/call   -26.11%
-bench_numdigits_user42690_fixed_a          ~ 13.408 avg ns/call   -43.74%
-bench_numdigits_dumb_sprintf_strlen        ~ 49.636 avg ns/call  -432.12%
+bench_numdigits_simple                     ~  0.815 avg ns/call    91.30%
+bench_numdigits_clifford_buggy             ~  0.816 avg ns/call    91.29%
+bench_numdigits_simple_reverse             ~  0.817 avg ns/call    91.28%
+bench_numdigits_alexandrescu_pohoreski_v3  ~  1.375 avg ns/call    85.32%
+bench_numdigits_pohoreski_v2a              ~  1.376 avg ns/call    85.31%
+bench_numdigits_pohoreski_v3a              ~  1.767 avg ns/call    81.13%
+bench_numdigits_pohoreski_v4b              ~  1.766 avg ns/call    81.15%
+bench_numdigits_pohoreski_v3b              ~  1.767 avg ns/call    81.14%
+bench_numdigits_pohoreski_v1a              ~  1.871 avg ns/call    80.02%
+bench_numdigits_pohoreski_v4a              ~  1.940 avg ns/call    79.29%
+bench_numdigits_pohoreski_v2b              ~  2.294 avg ns/call    75.51%
+bench_numdigits_pohoreski_v1b              ~  2.297 avg ns/call    75.48%
+bench_numdigits_gabriel_v1c                ~  2.553 avg ns/call    72.75%
+bench_numdigits_gabriel_v1a                ~  2.631 avg ns/call    71.91%
+bench_numdigits_gabriel_v1b                ~  2.833 avg ns/call    69.75%
+bench_numdigits_clifford_fixed             ~  3.873 avg ns/call    58.65%
+bench_numdigits_reference_mixed_int        ~  4.941 avg ns/call    47.25%
+bench_numdigits_reference_int              ~  4.945 avg ns/call    47.20%
+bench_numdigits_ransom                     ~  4.990 avg ns/call    46.72%
+bench_numdigits_vitali                     ~  5.103 avg ns/call    45.52%
+bench_numdigits_alexandrescu_pohoreski_v2  ~  5.127 avg ns/call    45.26%
+bench_numdigits_alink_fixed_v2b            ~  5.374 avg ns/call    42.62%
+bench_numdigits_alink_fixed_v1b            ~  5.383 avg ns/call    42.53%
+bench_numdigits_if_naive                   ~  5.793 avg ns/call    38.15%
+bench_numdigits_alink_fixed_v1a            ~  5.841 avg ns/call    37.64%
+bench_numdigits_alink_buggy_v1             ~  6.372 avg ns/call    31.97%
+bench_numdigits_alink_fixed_v2a            ~  7.142 avg ns/call    23.75%
+bench_numdigits_alexandrescu_v1            ~  9.360 avg ns/call     0.00%
+bench_numdigits_user42690_fixed_b          ~  9.385 avg ns/call    -0.20%
+bench_numdigits_alink_buggy_v2             ~  9.545 avg ns/call    -1.90%
+bench_numdigits_microsoft_itoa_strlen      ~ 10.803 avg ns/call   -15.34%
+bench_numdigits_user42690_buggy            ~ 10.945 avg ns/call   -16.85%
+bench_numdigits_thomas                     ~ 11.755 avg ns/call   -25.50%
+bench_numdigits_user42690_fixed_a          ~ 13.394 avg ns/call   -43.00%
+bench_numdigits_dumb_sprintf_strlen        ~ 48.854 avg ns/call  -421.58%
+
