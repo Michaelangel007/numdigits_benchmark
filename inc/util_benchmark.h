@@ -225,6 +225,18 @@ namespace benchmark
         std::sort( sorted.begin(), sorted.end(), CompareElapsedNS );
 
         printf( "\n" );
+        printf( "=== Summary (In order of appearance) ===\n" );
+        for (Benchmark* bench : RegisteredBenchmarks)
+        {
+            printf( "%*s  ", -(int)MaximumName, bench->Name );
+            if (bench->Metrics.AverageNSPerCall > 0.0)
+                printf( "~%7.3f avg ns/call  %7.2f%%", bench->Metrics.AverageNSPerCall, bench->Metrics.AveragePercentFaster );
+            else
+                printf( "%7.3f ns/call  %7.2f%%", bench->Metrics.CallerNS, bench->Metrics.PercentFaster );
+            printf( "\n" );
+        }
+
+        printf( "\n" );
         printf( "=== Summary (Best to Worst) ===\n" );
         for (Benchmark* bench : sorted)
         {
