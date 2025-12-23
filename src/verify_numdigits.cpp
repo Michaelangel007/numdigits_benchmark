@@ -675,7 +675,11 @@ void verify_int()
         , { numdigits_pohoreski_v4a            , "pohoreski_v4a"             }
         , { numdigits_pohoreski_v4b            , "pohoreski_v4b"             }
         , { numdigits_ransom                   , "ransom"                    }
+        , { numdigits10_int32                  , "reference_int32"           }
+        , { numdigits10_int                    , "reference_pow10_int"       }
+        , { numdigits10_mixed_int              , "reference_mixed_int"       }
         , { numdigits_simple                   , "simple"                    }
+        , { numdigits_simple_reverse           , "simple_reverse"            }
         , { numdigits_thomas                   , "thomas"                    }
         , { numdigits_user42690_buggy          , "user42690_buggy"           }
         , { numdigits_user42690_fixed_a        , "user42690_fixed_a"         }
