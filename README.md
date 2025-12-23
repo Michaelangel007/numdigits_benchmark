@@ -306,7 +306,7 @@ int numdigits10_int( int n )
 }
 ```
 
-On macOS the simple version beats everything  using the reference uin64_t.
+On macOS the simple version beats everything using the reference uint64_t.
 ```c++
 
 // Reference uint64_t
@@ -370,8 +370,7 @@ We need to verify each implementation passes:
 * powers-of-10
 * nines
 
-Using a data-driven approach makes this trivial to extend tests.  I used these manual tables to verify that each implementation worked correctly (since I couldn't trust ANY implementation) when I discovered a bug in the slide version of Andrei's `digits10()` as discussed in the [Introduction](#introduction).
-
+Using a data-driven approach makes this trivial to extend tests.  I used these manual tables to verify that each implementation worked correctly (since I couldn't trust ANY implementation, not even my own!)
 ```c++
     struct IntKeyVal
     {
@@ -506,6 +505,52 @@ Using a data-driven approach makes this trivial to extend tests.  I used these m
     };
     const int NUM_INT_POW10 = sizeof(TEST_INT_POW10) / sizeof(TEST_INT_POW10[0]);
 ```
+These tests allowed me discover a **minor typo bug** in the slide version of Andrei's `digits10()` as discussed in the [Introduction](#introduction). (See `test_original_digits10()` in verify_numdigits.cpp)
+
+
+```
+                   0:  1 ==  1 pass
+                   1:  1 ==  1 pass
+                   9:  1 ==  1 pass
+                  10:  2 ==  2 pass
+                  99:  2 ==  2 pass
+                 100:  3 ==  3 pass
+                 999:  3 ==  3 pass
+                1000:  4 ==  4 pass
+                9999:  4 ==  4 pass
+               10000:  6 ==  5 FAIL in original digits10()!
+               99999:  5 ==  5 pass
+              100000:  5 ==  6 FAIL in original digits10()!
+              999999:  6 ==  6 pass
+             1000000:  7 ==  7 pass
+             9999999:  7 ==  7 pass
+            10000000:  8 ==  8 pass
+            99999999:  8 ==  8 pass
+           100000000:  9 ==  9 pass
+           999999999:  9 ==  9 pass
+          1000000000: 10 == 10 pass
+          9999999999: 10 == 10 pass
+         10000000000: 11 == 11 pass
+         99999999999: 11 == 11 pass
+        100000000000: 12 == 12 pass
+        999999999999: 12 == 12 pass
+       1000000000000: 13 == 13 pass
+       9999999999999: 13 == 13 pass
+      10000000000000: 14 == 14 pass
+      99999999999999: 14 == 14 pass
+     100000000000000: 15 == 15 pass
+     999999999999999: 15 == 15 pass
+    1000000000000000: 16 == 16 pass
+    9999999999999999: 16 == 16 pass
+   10000000000000000: 18 == 17 FAIL in original digits10()!
+   99999999999999999: 17 == 17 pass
+  100000000000000000: 17 == 18 FAIL in original digits10()!
+  999999999999999999: 18 == 18 pass
+ 1000000000000000000: 19 == 19 pass
+ 9999999999999999999: 19 == 19 pass
+10000000000000000000: 20 == 20 pass
+```
+
 
 # Compiling
 
