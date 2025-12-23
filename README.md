@@ -110,45 +110,45 @@ Specifically,
   * not handling INT_MAX, and
   * having compile-time errors such as typos.
 
-# Data
+# Results
 
 I took the most popular answers, fixed them, wrote a verification utility and benchmark 33 implementations to get actual hard data. Timings show average ns/call and which algorithms are faster compared Andrei's "base" version.
 
-| Algorithm                 |Apple M2       |Ryzen 5600X        |%Faster |Threadripper 3960X |%Faster |
-|:--------------------------|--------------:|------------------:|-------:|------------------:|-------:|
-| alexandrescu_v1           | ??.?? ns/call |~ 9.780 avg ns/call|   0.00%|~11.678 avg ns/call|   0.00%|
-| alexandrescu_pohoreski_v2 | ??.?? ns/call |~ 5.430 avg ns/call|  44.47%|~ 6.310 avg ns/call|  45.76%|
-| alexandrescu_pohoreski_v3 | ??.?? ns/call |~ 2.562 avg ns/call|  73.80%|~ 2.895 avg ns/call|  75.11%|
-| alink_buggy_v1            | ??.?? ns/call |~ 4.903 avg ns/call|  49.86%|~ 6.094 avg ns/call|  47.62%|
-| alink_buggy_v2            | ??.?? ns/call |~ 7.669 avg ns/call|  21.58%|~ 9.446 avg ns/call|  18.81%|
-| alink_fixed_v1a           | ??.?? ns/call |~ 5.847 avg ns/call|  40.20%|~ 6.822 avg ns/call|  41.36%|
-| alink_fixed_v1b           | ??.?? ns/call |~ 5.149 avg ns/call|  47.35%|~ 5.873 avg ns/call|  49.52%|
-| alink_fixed_v2a           | ??.?? ns/call |~ 8.838 avg ns/call|  24.03%|~ 8.838 avg ns/call|  24.03%|
-| alink_fixed_v2b           | ??.?? ns/call |~ 5.963 avg ns/call|  39.02%|~ 6.970 avg ns/call|  40.09%|
-| clifford_buggy            | ??.?? ns/call |~ 5.563 avg ns/call|  43.11%|~ 6.057 avg ns/call|  47.93%|
-| clifford_fixed            | ??.?? ns/call |~ 5.413 avg ns/call|  44.65%|~ 6.001 avg ns/call|  48.42%|
-| dumb_sprintf_strlen       | ??.?? ns/call |~56.827 avg ns/call|-481.14%|~89.763 avg ns/call|-671.61%|
-| gabriel_v1a               | ??.?? ns/call |~ 5.803 avg ns/call|  40.65%|~ 7.487 avg ns/call|  35.64%|
-| gabriel_v1b               | ??.?? ns/call |~ 3.599 avg ns/call|  63.20%|~ 4.398 avg ns/call|  62.20%|
-| gabriel_v1c               | ??.?? ns/call |~ 3.435 avg ns/call|  64.87%|~ 4.396 avg ns/call|  62.22%|
-| if_naive                  | ??.?? ns/call |~ 6.677 avg ns/call|  31.71%|~ 7.516 avg ns/call|  35.39%|
-| microsoft_itoa_strlen     | ??.?? ns/call |~28.799 avg ns/call|-194.51%|~51.631 avg ns/call|-343.82%|
-| pohoreski_v1a             | ??.?? ns/call |~ 6.971 avg ns/call|  28.71%|~ 8.458 avg ns/call|  27.30%|
-| pohoreski_v1b             | ??.?? ns/call |~ 4.700 avg ns/call|  51.94%|~ 5.379 avg ns/call|  53.76%|
-| pohoreski_v2a             | ??.?? ns/call |~ 6.727 avg ns/call|  31.20%|~ 8.018 avg ns/call|  31.08%|
-| pohoreski_v2b             | ??.?? ns/call |~ 4.332 avg ns/call|  55.70%|~ 5.056 avg ns/call|  56.54%|
-| pohoreski_v3a             | ??.?? ns/call |~ 2.926 avg ns/call|  70.08%|~ 3.506 avg ns/call|  69.86%|
-| pohoreski_v3b             | ??.?? ns/call |~ 2.940 avg ns/call|  69.94%|~ 3.518 avg ns/call|  69.76%|
-| pohoreski_v4a             | ??.?? ns/call |~ 8.180 avg ns/call|  16.35%|~ 9.756 avg ns/call|  16.14%|
-| pohoreski_v4b             | ??.?? ns/call |~ 5.498 avg ns/call|  43.77%|~ 6.833 avg ns/call|  41.27%|
-| ransom                    | ??.?? ns/call |~ 8.521 avg ns/call|  12.86%|~10.065 avg ns/call|  13.48%|
-| reference_int             | ??.?? ns/call |~ 4.767 avg ns/call|  51.25%|~ 5.484 avg ns/call|  52.86%|
-| simple                    | ??.?? ns/call |~ 7.945 avg ns/call|  18.75%|~ 9.406 avg ns/call|  19.14%|
-| thomas                    | ??.?? ns/call |~12.819 avg ns/call| -31.10%|~14.860 avg ns/call| -27.74%|
-| user42690_buggy           | ??.?? ns/call |~12.523 avg ns/call| -28.06%|~14.429 avg ns/call| -24.03%|
-| user42690_fixed_a         | ??.?? ns/call |~14.846 avg ns/call| -51.82%|~17.043 avg ns/call| -46.50%|
-| user42690_fixed_b         | ??.?? ns/call |~10.937 avg ns/call| -11.85%|~12.481 avg ns/call|  -7.29%|
-| vitali                    | ??.?? ns/call |~ 5.185 avg ns/call|  46.97%|~ 6.153 avg ns/call|  47.11%|
+| Algorithm                 |Apple M2           |%Faster |Ryzen 5600X        |%Faster |Threadripper 3960X |%Faster |
+|:--------------------------|------------------:|-------:|------------------:|-------:|------------------:|-------:|
+| alexandrescu_v1           |~ 9.332 avg ns/call|   0.00%|~ 9.780 avg ns/call|   0.00%|~11.678 avg ns/call|   0.00%|
+| alexandrescu_pohoreski_v2 |~ 4.976 avg ns/call|  46.66%|~ 5.430 avg ns/call|  44.47%|~ 6.310 avg ns/call|  45.76%|
+| alexandrescu_pohoreski_v3 |~ 1.371 avg ns/call|  85.30%|~ 2.562 avg ns/call|  73.80%|~ 2.895 avg ns/call|  75.11%|
+| alink_buggy_v1            |~ 6.403 avg ns/call|  31.35%|~ 4.903 avg ns/call|  49.86%|~ 6.094 avg ns/call|  47.62%|
+| alink_buggy_v2            |~ 9.539 avg ns/call|  -2.26%|~ 7.669 avg ns/call|  21.58%|~ 9.446 avg ns/call|  18.81%|
+| alink_fixed_v1a           |~ 5.848 avg ns/call|  37.31%|~ 5.847 avg ns/call|  40.20%|~ 6.822 avg ns/call|  41.36%|
+| alink_fixed_v1b           |~ 5.300 avg ns/call|  43.19%|~ 5.149 avg ns/call|  47.35%|~ 5.873 avg ns/call|  49.52%|
+| alink_fixed_v2a           |~ 7.152 avg ns/call|  23.33%|~ 8.838 avg ns/call|  24.03%|~ 8.838 avg ns/call|  24.03%|
+| alink_fixed_v2b           |~ 5.390 avg ns/call|  42.22%|~ 5.963 avg ns/call|  39.02%|~ 6.970 avg ns/call|  40.09%|
+| clifford_buggy            |~ 0.813 avg ns/call|  91.28%|~ 5.563 avg ns/call|  43.11%|~ 6.057 avg ns/call|  47.93%|
+| clifford_fixed            |~ 3.904 avg ns/call|  58.15%|~ 5.413 avg ns/call|  44.65%|~ 6.001 avg ns/call|  48.42%|
+| dumb_sprintf_strlen       |~49.636 avg ns/call|-432.12%|~56.827 avg ns/call|-481.14%|~89.763 avg ns/call|-671.61%|
+| gabriel_v1a               |~ 2.625 avg ns/call|  71.86%|~ 5.803 avg ns/call|  40.65%|~ 7.487 avg ns/call|  35.64%|
+| gabriel_v1b               |~ 2.825 avg ns/call|  69.71%|~ 3.599 avg ns/call|  63.20%|~ 4.398 avg ns/call|  62.20%|
+| gabriel_v1c               |~ 2.550 avg ns/call|  72.67%|~ 3.435 avg ns/call|  64.87%|~ 4.396 avg ns/call|  62.22%|
+| if_naive                  |~ 5.852 avg ns/call|  37.26%|~ 6.677 avg ns/call|  31.71%|~ 7.516 avg ns/call|  35.39%|
+| microsoft_itoa_strlen     |~10.740 avg ns/call| -15.14%|~28.799 avg ns/call|-194.51%|~51.631 avg ns/call|-343.82%|
+| pohoreski_v1a             |~ 1.869 avg ns/call|  79.97%|~ 6.971 avg ns/call|  28.71%|~ 8.458 avg ns/call|  27.30%|
+| pohoreski_v1b             |~ 2.293 avg ns/call|  75.42%|~ 4.700 avg ns/call|  51.94%|~ 5.379 avg ns/call|  53.76%|
+| pohoreski_v2a             |~ 1.448 avg ns/call|  84.48%|~ 6.727 avg ns/call|  31.20%|~ 8.018 avg ns/call|  31.08%|
+| pohoreski_v2b             |~ 2.293 avg ns/call|  75.41%|~ 4.332 avg ns/call|  55.70%|~ 5.056 avg ns/call|  56.54%|
+| pohoreski_v3a             |~ 1.765 avg ns/call|  81.08%|~ 2.926 avg ns/call|  70.08%|~ 3.506 avg ns/call|  69.86%|
+| pohoreski_v3b             |~ 1.764 avg ns/call|  81.09%|~ 2.940 avg ns/call|  69.94%|~ 3.518 avg ns/call|  69.76%|
+| pohoreski_v4a             |~ 1.944 avg ns/call|  79.16%|~ 8.180 avg ns/call|  16.35%|~ 9.756 avg ns/call|  16.14%|
+| pohoreski_v4b             |~ 1.765 avg ns/call|  81.08%|~ 5.498 avg ns/call|  43.77%|~ 6.833 avg ns/call|  41.27%|
+| ransom                    |~ 4.960 avg ns/call|  46.83%|~ 8.521 avg ns/call|  12.86%|~10.065 avg ns/call|  13.48%|
+| reference_int             |~ 4.940 avg ns/call|  47.04%|~ 4.767 avg ns/call|  51.25%|~ 5.484 avg ns/call|  52.86%|
+| simple                    |~ 0.813 avg ns/call|  91.28%|~ 7.945 avg ns/call|  18.75%|~ 9.406 avg ns/call|  19.14%|
+| thomas                    |~11.763 avg ns/call| -26.11%|~12.819 avg ns/call| -31.10%|~14.860 avg ns/call| -27.74%|
+| user42690_buggy           |~10.987 avg ns/call| -17.78%|~12.523 avg ns/call| -28.06%|~14.429 avg ns/call| -24.03%|
+| user42690_fixed_a         |~13.408 avg ns/call| -43.74%|~14.846 avg ns/call| -51.82%|~17.043 avg ns/call| -46.50%|
+| user42690_fixed_b         |~ 9.358 avg ns/call|  -0.32%|~10.937 avg ns/call| -11.85%|~12.481 avg ns/call|  -7.29%|
+| vitali                    |~ 9.358 avg ns/call|  -0.32%|~ 5.185 avg ns/call|  46.97%|~ 6.153 avg ns/call|  47.11%|
 
 **NOTES:**
 
@@ -156,6 +156,8 @@ I took the most popular answers, fixed them, wrote a verification utility and be
  * 5 runs, discard best case, worst case, average remaining 3 timings.
 
 Sorted by performance from best to worst:
+
+## Windows 10, AMD Threadripper 3960X
 
 |Rank| Algorithm                  |Threadripper 3960X |%Faster |
 |---:|:---------------------------|------------------:|-------:|
@@ -193,6 +195,7 @@ Sorted by performance from best to worst:
 | 32 | microsoft_itoa_strlen      |~51.631 avg ns/call|-343.82%|
 | 33 | dumb_sprintf_strlen        |~89.763 avg ns/call|-671.61%|
 
+## Windows 10, AMD Ryzen 5600X
 
 |Rank| Algorithm                  |Ryzen 5600X        |%Faster |
 |---:|---------------------------:|------------------:|-------:|
@@ -230,9 +233,53 @@ Sorted by performance from best to worst:
 | 32 | microsoft_itoa_strlen      |~28.799 avg ns/call|-194.51%|
 | 33 | dumb_sprintf_strlen        |~56.827 avg ns/call|-481.14%|
 
-This `reference_int` implementation beats almost all of the SO answers:
+## macOS 13.7.8, Apple M2 Max
 
-```cpp
+Apple's M2 Max performance is _very_ interesting to see!
+
+|Rank| Algorithm                  |Apple M2 Max       |%Faster |
+|---:|---------------------------:|------------------:|-------:|
+|  1 | simple                     |~ 0.813 avg ns/call|  91.28%|
+|  2 | clifford_buggy             |~ 0.813 avg ns/call|  91.28%|
+|  3 | alexandrescu_pohoreski_v3  |~ 1.371 avg ns/call|  85.30%|
+|  4 | pohoreski_v2a              |~ 1.448 avg ns/call|  84.48%|
+|  5 | pohoreski_v3b              |~ 1.764 avg ns/call|  81.09%|
+|  6 | pohoreski_v4b              |~ 1.765 avg ns/call|  81.08%|
+|  7 | pohoreski_v3a              |~ 1.765 avg ns/call|  81.08%|
+|  8 | pohoreski_v1a              |~ 1.869 avg ns/call|  79.97%|
+|  9 | pohoreski_v4a              |~ 1.944 avg ns/call|  79.16%|
+| 10 | pohoreski_v2b              |~ 2.293 avg ns/call|  75.41%|
+| 11 | pohoreski_v1b              |~ 2.293 avg ns/call|  75.42%|
+| 12 | gabriel_v1c                |~ 2.550 avg ns/call|  72.67%|
+| 13 | gabriel_v1a                |~ 2.625 avg ns/call|  71.86%|
+| 14 | gabriel_v1b                |~ 2.825 avg ns/call|  69.71%|
+| 15 | clifford_fixed             |~ 3.904 avg ns/call|  58.15%|
+| 16 | reference_int              |~ 4.940 avg ns/call|  47.04%|
+| 17 | ransom                     |~ 4.960 avg ns/call|  46.83%|
+| 18 | alexandrescu_pohoreski_v2  |~ 4.976 avg ns/call|  46.66%|
+| 19 | vitali                     |~ 5.108 avg ns/call|  45.24%|
+| 20 | alink_fixed_v1b            |~ 5.300 avg ns/call|  43.19%|
+| 21 | alink_fixed_v2b            |~ 5.390 avg ns/call|  42.22%|
+| 22 | alink_fixed_v1a            |~ 5.848 avg ns/call|  37.31%|
+| 23 | if_naive                   |~ 5.852 avg ns/call|  37.26%|
+| 24 | alink_buggy_v1             |~ 6.403 avg ns/call|  31.35%|
+| 25 | alink_fixed_v2a            |~ 7.152 avg ns/call|  23.33%|
+| 26 | alexandrescu_v1            |~ 9.332 avg ns/call|   0.00%|
+| 27 | user42690_fixed_b          |~ 9.358 avg ns/call|  -0.32%|
+| 28 | alink_buggy_v2             |~ 9.539 avg ns/call|  -2.26%|
+| 29 | microsoft_itoa_strlen      |~10.740 avg ns/call| -15.14%|
+| 30 | user42690_buggy            |~10.987 avg ns/call| -17.78%|
+| 31 | thomas                     |~11.763 avg ns/call| -26.11%|
+| 32 | user42690_fixed_a          |~13.408 avg ns/call| -43.74%|
+| 33 | dumb_sprintf_strlen        |~49.636 avg ns/call|-432.12%|
+
+Fixing the broken implementation of `clifford` takes a huge performance hit. This is WHY it is important to verify your algorithm _works correctly!_
+
+# Implementations
+
+On Windows, this `reference_int` implementation beats almost all but one of the SO answers:
+
+```c++
 // Reference int
 int numdigits10_int( int n )
 {
@@ -259,9 +306,50 @@ int numdigits10_int( int n )
 }
 ```
 
+On macOS the simple version beats everything  using the reference uin64_t.
+```c++
+
+// Reference uint64_t
+uint32_t numdigits10_uint64( uint64_t n )
+{
+    if (n <                         10ull) return  1;
+    if (n <                        100ull) return  2;
+    if (n <                      1'000ull) return  3;
+    if (n <                     10'000ull) return  4;
+    if (n <                    100'000ull) return  5;
+    if (n <                  1'000'000ull) return  6;
+    if (n <                 10'000'000ull) return  7;
+    if (n <                100'000'000ull) return  8;
+    if (n <              1'000'000'000ull) return  9;
+    if (n <             10'000'000'000ull) return 10;
+    if (n <            100'000'000'000ull) return 11;
+    if (n <          1'000'000'000'000ull) return 12;
+    if (n <         10'000'000'000'000ull) return 13;
+    if (n <        100'000'000'000'000ull) return 14;
+    if (n <      1'000'000'000'000'000ull) return 15;
+    if (n <     10'000'000'000'000'000ull) return 16;
+    if (n <    100'000'000'000'000'000ull) return 17;
+    if (n <  1'000'000'000'000'000'000ull) return 18;
+    if (n < 10'000'000'000'000'000'000ull) return 19;
+    /*else<=18'446'744'073'709'551'615*/   return 20; // 2^64 - 1
+}
+
+// Simple version
+int numdigits_simple_int64(int64_t n)
+{
+    if (n == INT64_MIN) return 20; // handle edge case of negating int min
+    if (n < 0) return 1 + numdigits10_uint64( (uint64_t) -n );
+    else       return     numdigits10_uint64( (uint64_t)  n );
+}
+
+int numdigits_simple(int n) {
+    return numdigits_simple_int64( (int64_t) n );
+}
+```
+
 Andrei never provided an `int` version so I experimented with various "wrappers".
 
-```c
+```c++
     const uint32_t x = (n < 0) ? (uint64_t)-n & 0xFFFFFFFFU : n;
     return (n< < 0) + numdigits( x );
 
@@ -284,7 +372,7 @@ We need to verify each implementation passes:
 
 Using a data-driven approach makes this trivial to extend tests.  I used these manual tables to verify that each implementation worked correctly (since I couldn't trust ANY implementation) when I discovered a bug in the slide version of Andrei's `digits10()` as discussed in the [Introduction](#introduction).
 
-```c
+```c++
     struct IntKeyVal
     {
         int number;
@@ -427,7 +515,10 @@ Use MSVC 2022 and open `.\build\numdigits_benchmark.sln`
 
 ## macOS
 
-Forthcoming.
+```bash
+g++ -stdc=c++17 -O2 -Wall -Wextra -Iinc src/numdigits_benchmark.cpp -o bin/numdigits_benchmark
+g++ -stdc=c++17 -O2 -Wall -Wextra -Iinc src/verify_numdigits.cpp    -o bin/verify_numdigits
+```
 
 ## Linux
 
@@ -441,10 +532,18 @@ To run a single test:
 .\bin\numdigits_benchmark.exe
 ```
 
-To run a "Best of 5" discarding the best case, worst case, and calculating the average time:
+To run a "Best of 5" discarding the best case, worst case, and calculating the average time use a command-line argument `5`.
 
-```
+On Windows:
+
+```cmd
 .\bin\numdigits_benchmark.exe 5
+```
+
+or on macOS / Linux:
+
+```bash
+./bin/numdigits_benchmark 5
 ```
 
 # Further Research
@@ -465,4 +564,4 @@ Is this THE fastest `NumDigitsBase10()`? Who knows but if we can optimize someth
 
 This README is Copyleft {C} 2025 Michaelangel007.
 
-Last updated Dec. 21, 2025.
+Last updated Dec. 22, 2025.
