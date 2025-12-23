@@ -414,16 +414,18 @@ int numdigits_if_naive( int n )
     /*else<=2'147'483'647*/return 10; // 1'000'000'000 .. 2'147'483'647
 }
 
+#include <string>
 // Only really for testing of how slow _itoa() is!
 int32_t numdigits_microsoft_itoa_strlen( int n )
 {
-    char buffer[16];
 #if _MSC_VER
+    char buffer[16];
     assert( sizeof(buffer) >= _MAX_ITOSTR_BASE10_COUNT );
     _itoa( n, buffer, 10 );
     return (int32_t) strlen( buffer );
 #else
-    return 0;
+    std::string buffer = std::to_string( n );
+    return (int32_t) buffer.length();
 #endif
 }
 
