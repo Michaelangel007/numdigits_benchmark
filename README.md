@@ -515,6 +515,14 @@ Use MSVC 2022 and open `.\build\numdigits_benchmark.sln`
 
 ## macOS
 
+Use the supplied makefile
+
+```bash
+make -f Makefile.osx
+```
+
+or compile manually:
+
 ```bash
 g++ -stdc=c++17 -O2 -Wall -Wextra -Iinc src/numdigits_benchmark.cpp -o bin/numdigits_benchmark
 g++ -stdc=c++17 -O2 -Wall -Wextra -Iinc src/verify_numdigits.cpp    -o bin/verify_numdigits
