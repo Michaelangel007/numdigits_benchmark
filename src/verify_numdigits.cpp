@@ -665,8 +665,6 @@ void verify_int()
         , { numdigits_gabriel_v1b              , "gabriel_v1b"               }
         , { numdigits_gabriel_v1c              , "gabriel_v1c"               }
         , { numdigits_if_naive                 , "if_naive"                  }
-        , { numdigits10_int                    , "reference_int"             }
-        , { numdigits10_int32                  , "reference_int32"           }
         , { numdigits_microsoft_itoa_strlen    , "microsoft_itoa_strlen"     }
         , { numdigits_pohoreski_v1a            , "pohoreski_v1a"             }
         , { numdigits_pohoreski_v1b            , "pohoreski_v1b"             }
@@ -728,12 +726,13 @@ void verify_u64()
     };
 
     FuncDescU64 aFuncs[] = {
-          { numdigits10_uint64      , "numdigits10_uint64"       }
-        , { digits10_alexandrescu_v2, "digits10_alexandrescu_v2" }
-        , { digits10_alexandrescu_v3, "digits10_alexandrescu_v3" }
-        , { digits10_gabriel        , "digits10_gabriel"         }
-        , { digits10_pohoreski_v1   , "digits10_pohoreski_v1"    }
-        , { digits10_pohoreski_v2   , "digits10_pohoreski_v2"    }
+          { numdigits10_uint64        , "numdigits10_uint64"         }
+        , { numdigits10_reverse_uint64, "numdigits10_reverse_uint64" }
+        , { digits10_alexandrescu_v2  , "digits10_alexandrescu_v2"   }
+        , { digits10_alexandrescu_v3  , "digits10_alexandrescu_v3"   }
+        , { digits10_gabriel          , "digits10_gabriel"           }
+        , { digits10_pohoreski_v1     , "digits10_pohoreski_v1"      }
+        , { digits10_pohoreski_v2     , "digits10_pohoreski_v2"      }
     };
     const int nFuncs = sizeof(aFuncs) / sizeof(aFuncs[0]);
 

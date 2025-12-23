@@ -197,13 +197,23 @@ BENCHMARK(bench_numdigits_ransom);
 
 static void bench_numdigits_reference_int(benchmark::State& state) {
     bench<numdigits10_int>(state);
-}                            
+}
 BENCHMARK(bench_numdigits_reference_int);
+
+static void bench_numdigits_reference_mixed_int(benchmark::State& state) {
+    bench<numdigits10_mixed_int>(state);
+}
+BENCHMARK(bench_numdigits_reference_mixed_int);
 
 static void bench_numdigits_simple(benchmark::State& state) {
     bench<numdigits_simple>(state);
 }
 BENCHMARK(bench_numdigits_simple);
+
+static void bench_numdigits_simple_reverse(benchmark::State& state) {
+    bench<numdigits_simple_reverse>(state);
+}
+BENCHMARK(bench_numdigits_simple_reverse);
 
 static void bench_numdigits_thomas(benchmark::State& state) {
     bench<numdigits_thomas>(state);
