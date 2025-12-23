@@ -159,6 +159,8 @@ Sorted by performance from best to worst:
 
 ## Windows 10, AMD Threadripper 3960X
 
+Here we see the weakness of the early Threadripper generations -- poor single-threaded performance, aka _inherently sequential._ Their real strength has always been algorithms that multi-thread nicely, aka _embarrassingly parallel_ implementations.
+
 |Rank| Algorithm                  |Threadripper 3960X |%Faster |
 |---:|:---------------------------|------------------:|-------:|
 |  1 | alexandrescu_pohoreski_v3  |~ 2.895 avg ns/call|  75.11%|
@@ -196,6 +198,8 @@ Sorted by performance from best to worst:
 | 33 | dumb_sprintf_strlen        |~89.763 avg ns/call|-671.61%|
 
 ## Windows 10, AMD Ryzen 5600X
+
+Testing 3rd generation Ryzen we see minor disruptions in the middle but nothing too earth shattering.
 
 |Rank| Algorithm                  |Ryzen 5600X        |%Faster |
 |---:|---------------------------:|------------------:|-------:|
