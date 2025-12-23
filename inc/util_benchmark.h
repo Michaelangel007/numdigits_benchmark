@@ -1,4 +1,6 @@
 /*
+// v1.7 Add -? usage help and examples
+// v1.6 Add -markdown command-line argument, pretty print support (markdown table and rank in best)
 // v1.5 Add Best of N support
 // v1.4 Cache output of benchmark test and warn if an implementation is buggy
 // v1.3 Output no optimize on same line as totals
@@ -27,9 +29,10 @@ https://google.github.io/benchmark/user_guide.html
 
 namespace benchmark
 {
-    static void *ResultNoOptimize;
-    static void *FirstNoOptimize;
+    static void  *ResultNoOptimize;
+    static void  *FirstNoOptimize;
     static size_t MaximumName;
+    static char   Separator;
 
     struct Benchmark;
     std::vector<Benchmark*> RegisteredBenchmarks;
@@ -118,25 +121,52 @@ namespace benchmark
         }
     };
 
-    static void Initialize(int *nArg, char **Argv)
+    static void Initialize(int *Argc, char **Argv)
     {
-        printf( "Registered %zu functions...\n\n", RegisteredBenchmarks.size() );
+        Separator = ' ';
+        printf( "Registered %zu functions...\n", RegisteredBenchmarks.size() );
         ResultNoOptimize = 0;
         MaximumName = 0;
 
         iRun  = 0;
         nRuns = 1;
 
-        if (*nArg > 1)
+        int iArg = 1;
+        int nArg = *Argc;
+        for( iArg = 1; iArg < nArg; iArg++ )
         {
-            nRuns = atoi( Argv[1] );
-            nRuns = std::min( nRuns, 9 );
-            nRuns = std::max( nRuns, 1 );
-            if (nRuns == 2) // We can't do a "Best of" with only 2 tests
-                nRuns = 1; // since we discard the best case and worst case
-            if (nRuns > 1)
-                printf( "Best of %d\n", nRuns );
+            if (Argv[iArg][0] == '-')
+            {
+                if (strcmp(Argv[iArg], "-markdown") == 0)
+                {
+                    Separator = '|';
+                }
+                if (Argv[iArg][1] == '?')
+                {
+                    printf(
+"Usage: [-markdown] [#]\n"
+"Examples:\n"
+"    5               # Best of 5 runs, discard worst, best, average rest.\n"
+"    -markdown       # Only 1 run, show summary as markdown table.\n"
+"    -markdown 5     # Best of 5, show summary as markdown table.\n"
+                    );
+                    exit(0);
+                }
+            }
+            else
+            {
+                nRuns = atoi( Argv[ iArg ] );
+                nRuns = std::min( nRuns, 9 );
+                nRuns = std::max( nRuns, 1 );
+                if (nRuns == 2) // We can't do a "Best of" with only 2 tests
+                    nRuns = 1; // since we discard the best case and worst case
+            }
         }
+
+        const char OPTION_ON[] = " x";
+        printf( "[%c] Best of %d run(s).\n"               , OPTION_ON[ nRuns > 1        ], nRuns );
+        printf( "[%c] Pretty print summary as markdown.\n", OPTION_ON[ Separator == '|' ] );
+        printf( "\n" );
     }
 
     static void RunSpecifiedBenchmarks()
@@ -225,27 +255,40 @@ namespace benchmark
         std::sort( sorted.begin(), sorted.end(), CompareElapsedNS );
 
         printf( "\n" );
-        printf( "=== Summary (In order of appearance) ===\n" );
+        printf( "=== Summary (In Order of Appearance) ===\n" );
         for (Benchmark* bench : RegisteredBenchmarks)
         {
-            printf( "%*s  ", -(int)MaximumName, bench->Name );
+            printf( "%c %*s ", Separator, -(int)MaximumName, bench->Name );
             if (bench->Metrics.AverageNSPerCall > 0.0)
-                printf( "~%7.3f avg ns/call  %7.2f%%", bench->Metrics.AverageNSPerCall, bench->Metrics.AveragePercentFaster );
+                printf( "%c~%7.3f avg ns/call%c%7.2f%%%c\n"
+                    , Separator, bench->Metrics.AverageNSPerCall
+                    , Separator, bench->Metrics.AveragePercentFaster
+                    , Separator );
             else
-                printf( "%7.3f ns/call  %7.2f%%", bench->Metrics.CallerNS, bench->Metrics.PercentFaster );
-            printf( "\n" );
+                printf( "%c%7.3f ns/call%c%7.2f%%%c\n"
+                    , Separator, bench->Metrics.CallerNS
+                    , Separator, bench->Metrics.PercentFaster
+                    , Separator );
         }
 
+        int iRank = 1;
         printf( "\n" );
         printf( "=== Summary (Best to Worst) ===\n" );
         for (Benchmark* bench : sorted)
         {
-            printf( "%*s  ", -(int)MaximumName, bench->Name );
+            printf( "%c %2d ", Separator, iRank );
+            printf( "%c %*s ", Separator, -(int)MaximumName, bench->Name );
             if (bench->Metrics.AverageNSPerCall > 0.0)
-                printf( "~%7.3f avg ns/call  %7.2f%%", bench->Metrics.AverageNSPerCall, bench->Metrics.AveragePercentFaster );
+                printf( "%c~%7.3f avg ns/call%c%7.2f%%%c\n"
+                    , Separator, bench->Metrics.AverageNSPerCall
+                    , Separator, bench->Metrics.AveragePercentFaster
+                    , Separator );
             else
-                printf( "%7.3f ns/call  %7.2f%%", bench->Metrics.CallerNS, bench->Metrics.PercentFaster );
-            printf( "\n" );
+                printf( "%c%7.3f ns/call%c%7.2f%%%c\n"
+                    , Separator, bench->Metrics.CallerNS
+                    , Separator, bench->Metrics.PercentFaster
+                    , Separator );
+            iRank++;
         }
     }
 
