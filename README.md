@@ -613,6 +613,12 @@ or on macOS / Linux:
 
 # Further Research
 
+* Use different sample size initalization patterns. (Currently an uniform distribution across uint32_t is used.)
+  * [x] random, uniform distribution
+  * [ ] increasing:
+  * [ ] decreasing
+  * [ ] pipe organ
+  * [ ] reverse pipe organ
 * Benchmarking other implementations.
 * Possible to use SIMD to test 4 comparisons at a time?
 
