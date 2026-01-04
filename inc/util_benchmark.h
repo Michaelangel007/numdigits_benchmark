@@ -1,4 +1,6 @@
 /*
+// v1.7 Add -? usage help and examples
+// v1.6 Add -markdown command-line argument, pretty print support (markdown table and rank in best)
 // v1.5 Add Best of N support
 // v1.4 Cache output of benchmark test and warn if an implementation is buggy
 // v1.3 Output no optimize on same line as totals
@@ -27,9 +29,10 @@ https://google.github.io/benchmark/user_guide.html
 
 namespace benchmark
 {
-    static void *ResultNoOptimize;
-    static void *FirstNoOptimize;
+    static void  *ResultNoOptimize;
+    static void  *FirstNoOptimize;
     static size_t MaximumName;
+    static char   Separator;
 
     struct Benchmark;
     std::vector<Benchmark*> RegisteredBenchmarks;
@@ -53,41 +56,41 @@ namespace benchmark
 
     struct MetricData
     {
-        double           ElapsedMS; // milli
-        double           ElapsedNS; // nano
-        double           CallerNS;  // nanoseconds per call
+        double           ElapsedMS;  // milli
+        double           ElapsedNS;  // nano
+        double           NSPerCall;  // nanoseconds per call
         double           PercentFaster;
         double           AverageNSPerCall;
         double           AveragePercentFaster;
-        double           FirstCallerNS;
+        double           FirstNSPerCall;
 
         void Reset()
         {
             ElapsedMS            = 0.0;
             ElapsedNS            = 0.0;
-            CallerNS             = 0.0;
+            NSPerCall            = 0.0;
             PercentFaster        = 0.0;
             AverageNSPerCall     = 0.0; // none (yet)
             AveragePercentFaster = 0.0;
-            FirstCallerNS        = 0.0;
+            FirstNSPerCall       = 0.0;
         }
 
-        void Update(double ns, double ooTotalCalls, bool firstCaller, double firstCallerNS)
+        void Update(double ns, double ooTotalCalls, bool isFirstNSPerCall, double firstNSPerCall)
         {
-            ElapsedNS     = ns;
-            ElapsedMS     = ElapsedNS / 1'000'000; // 1 million nanoseconds per 1 millisecond
-            CallerNS      = ElapsedNS * ooTotalCalls;
-            if (firstCaller)
+            ElapsedNS = ns;
+            ElapsedMS = ElapsedNS / 1'000'000; // 1 million nanoseconds per 1 millisecond
+            NSPerCall = ElapsedNS * ooTotalCalls;
+            if (isFirstNSPerCall)
             {
-                PercentFaster = (100.0 * (firstCallerNS - CallerNS)) / firstCallerNS;
-                FirstCallerNS = firstCallerNS;
+                PercentFaster = (100.0 * (firstNSPerCall - NSPerCall)) / firstNSPerCall;
+                FirstNSPerCall = firstNSPerCall;
             }
         }
         void UpdateAverage( double averageNSPerCall, bool firstTest )
         {
             AverageNSPerCall = averageNSPerCall;
             if (!firstTest)
-                AveragePercentFaster = (100.0 * (FirstCallerNS - AverageNSPerCall)) / FirstCallerNS;
+                AveragePercentFaster = (100.0 * (FirstNSPerCall - AverageNSPerCall)) / FirstNSPerCall;
         }
     };
 
@@ -118,25 +121,52 @@ namespace benchmark
         }
     };
 
-    static void Initialize(int *nArg, char **Argv)
+    static void Initialize(int *Argc, char **Argv)
     {
-        printf( "Registered %zu functions...\n\n", RegisteredBenchmarks.size() );
+        Separator = ' ';
+        printf( "Registered %zu functions...\n", RegisteredBenchmarks.size() );
         ResultNoOptimize = 0;
         MaximumName = 0;
 
         iRun  = 0;
         nRuns = 1;
 
-        if (*nArg > 1)
+        int iArg = 1;
+        int nArg = *Argc;
+        for( iArg = 1; iArg < nArg; iArg++ )
         {
-            nRuns = atoi( Argv[1] );
-            nRuns = std::min( nRuns, 9 );
-            nRuns = std::max( nRuns, 1 );
-            if (nRuns == 2) // We can't do a "Best of" with only 2 tests
-                nRuns = 1; // since we discard the best case and worst case
-            if (nRuns > 1)
-                printf( "Best of %d\n", nRuns );
+            if (Argv[iArg][0] == '-')
+            {
+                if (strcmp(Argv[iArg], "-markdown") == 0)
+                {
+                    Separator = '|';
+                }
+                if (Argv[iArg][1] == '?')
+                {
+                    printf(
+"Usage: [-markdown] [#]\n"
+"Examples:\n"
+"    5               # Best of 5 runs, discard worst, best, average rest.\n"
+"    -markdown       # Only 1 run, show summary as markdown table.\n"
+"    -markdown 5     # Best of 5, show summary as markdown table.\n"
+                    );
+                    exit(0);
+                }
+            }
+            else
+            {
+                nRuns = atoi( Argv[ iArg ] );
+                nRuns = std::min( nRuns, 9 );
+                nRuns = std::max( nRuns, 1 );
+                if (nRuns == 2) // We can't do a "Best of" with only 2 tests
+                    nRuns = 1; // since we discard the best case and worst case
+            }
         }
+
+        const char OPTION_ON[] = " x";
+        printf( "[%c] Best of %d run(s).\n"               , OPTION_ON[ nRuns > 1        ], nRuns );
+        printf( "[%c] Pretty print summary as markdown.\n", OPTION_ON[ Separator == '|' ] );
+        printf( "\n" );
     }
 
     static void RunSpecifiedBenchmarks()
@@ -163,13 +193,13 @@ namespace benchmark
                     } while (bench->Passes < bench->MinPasses);
                 auto stop  = std::chrono::high_resolution_clock::now();
 
-                const double ooTotalCalls = 1.0 / ((double)bench->Passes * (double)states.size());
-                const double ns = (double) std::chrono::duration_cast<std::chrono::nanoseconds >(stop - start).count();
-                const bool   firstCaller   = (bench != RegisteredBenchmarks[0]);
-                const double firstCallerNS = RegisteredBenchmarks[0]->Metrics.CallerNS;
-                bench->Metrics.Update( ns, ooTotalCalls, firstCaller, firstCallerNS );
+                const double ooTotalCalls   = 1.0 / ((double)bench->Passes * (double)states.size());
+                const double ns             = (double) std::chrono::duration_cast<std::chrono::nanoseconds >(stop - start).count();
+                const bool   isFirstTest    = (bench != RegisteredBenchmarks[0]);
+                const double firstNSPerCall = RegisteredBenchmarks[0]->Metrics.NSPerCall;
+                bench->Metrics.Update( ns, ooTotalCalls, isFirstTest, firstNSPerCall );
 
-                if (firstCaller)
+                if (isFirstTest)
                 {
                     if (ResultNoOptimize && (FirstNoOptimize != ResultNoOptimize))
                     {
@@ -192,7 +222,7 @@ namespace benchmark
                         printf( " WARNING implementation buggy?");
                     printf( "\n");
                 }
-                printf( "    ns/call: %7.3f ns\n", bench->Metrics.CallerNS       );
+                printf( "    ns/call: %7.3f ns\n", bench->Metrics.NSPerCall      );
                 printf( "    %%faster: %6.2f%%\n", bench->Metrics.PercentFaster  );
             }
 
@@ -225,15 +255,40 @@ namespace benchmark
         std::sort( sorted.begin(), sorted.end(), CompareElapsedNS );
 
         printf( "\n" );
+        printf( "=== Summary (In Order of Appearance) ===\n" );
+        for (Benchmark* bench : RegisteredBenchmarks)
+        {
+            printf( "%c %*s ", Separator, -(int)MaximumName, bench->Name );
+            if (bench->Metrics.AverageNSPerCall > 0.0)
+                printf( "%c~%7.3f avg ns/call%c%7.2f%%%c\n"
+                    , Separator, bench->Metrics.AverageNSPerCall
+                    , Separator, bench->Metrics.AveragePercentFaster
+                    , Separator );
+            else
+                printf( "%c%7.3f ns/call%c%7.2f%%%c\n"
+                    , Separator, bench->Metrics.NSPerCall
+                    , Separator, bench->Metrics.PercentFaster
+                    , Separator );
+        }
+
+        int iRank = 1;
+        printf( "\n" );
         printf( "=== Summary (Best to Worst) ===\n" );
         for (Benchmark* bench : sorted)
         {
-            printf( "%*s  ", -(int)MaximumName, bench->Name );
+            printf( "%c %2d ", Separator, iRank );
+            printf( "%c %*s ", Separator, -(int)MaximumName, bench->Name );
             if (bench->Metrics.AverageNSPerCall > 0.0)
-                printf( "~%7.3f avg ns/call  %7.2f%%", bench->Metrics.AverageNSPerCall, bench->Metrics.AveragePercentFaster );
+                printf( "%c~%7.3f avg ns/call%c%7.2f%%%c\n"
+                    , Separator, bench->Metrics.AverageNSPerCall
+                    , Separator, bench->Metrics.AveragePercentFaster
+                    , Separator );
             else
-                printf( "%7.3f ns/call  %7.2f%%", bench->Metrics.CallerNS, bench->Metrics.PercentFaster );
-            printf( "\n" );
+                printf( "%c%7.3f ns/call%c%7.2f%%%c\n"
+                    , Separator, bench->Metrics.NSPerCall
+                    , Separator, bench->Metrics.PercentFaster
+                    , Separator );
+            iRank++;
         }
     }
 
@@ -257,24 +312,24 @@ namespace benchmark
                 const int iRun = 0;
                 Benchmark*  pBenchmark0 = aRuns[ iRun ][ iTest ];
                 MetricData& tMetrics = pBenchmark0->Metrics;
-                totalCaller.push_back( tMetrics.CallerNS );
-                worstCaller.push_back( tMetrics.CallerNS );
-                bestCaller .push_back( tMetrics.CallerNS );
+                totalCaller.push_back( tMetrics.NSPerCall );
+                worstCaller.push_back( tMetrics.NSPerCall );
+                bestCaller .push_back( tMetrics.NSPerCall );
             }
 
             for (int iTest = 0; iTest < nTests; iTest++ )
             {
-                // We need to pivot the data -- benchmark CallerNS results
+                // We need to pivot the data -- benchmark NSPerCall results
                 for (int iRun = 1; iRun < nRuns; iRun++ )
                 {
                     Benchmark* pBenchmarkI = aRuns[ iRun ][ iTest ];
-                    const double CallerNS = pBenchmarkI->Metrics.CallerNS;
+                    const double NSPerCall = pBenchmarkI->Metrics.NSPerCall;
 
-                    if (worstCaller[ iTest ] < CallerNS)
-                        worstCaller[ iTest ] = CallerNS;
-                    if (bestCaller [ iTest ] > CallerNS)
-                        bestCaller [ iTest ] = CallerNS;
-                    totalCaller[ iTest ] += CallerNS;
+                    if (worstCaller[ iTest ] < NSPerCall)
+                        worstCaller[ iTest ] = NSPerCall;
+                    if (bestCaller [ iTest ] > NSPerCall)
+                        bestCaller [ iTest ] = NSPerCall;
+                    totalCaller[    iTest ] += NSPerCall;
                 }
             }
 
@@ -315,6 +370,16 @@ namespace benchmark
 
     static Benchmark* Register(Benchmark* benchmark)
     {
+        // Display warning if we are trying to register the same benchmark more than once (could be a typo.)
+        for (Benchmark* bench : RegisteredBenchmarks)
+        {
+            if (benchmark->Func == bench->Func)
+            {
+                printf( "WARNING: Trying to register a duplicate benchmark! Is this intentional?\n"
+                        "         Check for a duplicate BENCHMARK(%s) macro.\n", bench->Name );
+            }
+        }
+
         RegisteredBenchmarks.push_back( benchmark );
         return benchmark;
     }

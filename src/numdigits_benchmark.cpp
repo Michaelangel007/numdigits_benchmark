@@ -23,7 +23,7 @@ inline static uint32_t digits10_alexandrescu_v3( uint64_t );
         // I know this is broken, but who cares.
         std::mt19937 rg{ std::random_device{}() };
 
-        std::vector<std::int32_t> samples(1000000);
+        std::vector<std::int32_t> samples(BENCHMARK_SAMPLE_SIZE);
         for (auto& s : samples)
             s = std::uniform_int_distribution<std::int32_t>{0, std::numeric_limits<std::int32_t>::max()}(rg);
 
@@ -197,13 +197,23 @@ BENCHMARK(bench_numdigits_ransom);
 
 static void bench_numdigits_reference_int(benchmark::State& state) {
     bench<numdigits10_int>(state);
-}                            
+}
 BENCHMARK(bench_numdigits_reference_int);
+
+static void bench_numdigits_reference_mixed_int(benchmark::State& state) {
+    bench<numdigits10_mixed_int>(state);
+}
+BENCHMARK(bench_numdigits_reference_mixed_int);
 
 static void bench_numdigits_simple(benchmark::State& state) {
     bench<numdigits_simple>(state);
 }
 BENCHMARK(bench_numdigits_simple);
+
+static void bench_numdigits_simple_reverse(benchmark::State& state) {
+    bench<numdigits_simple_reverse>(state);
+}
+BENCHMARK(bench_numdigits_simple_reverse);
 
 static void bench_numdigits_thomas(benchmark::State& state) {
     bench<numdigits_thomas>(state);
@@ -234,9 +244,11 @@ BENCHMARK(bench_numdigits_vitali);
 int main(int argc, char** argv)
 {
     printf( "Benchmarking numdigits()\n" );
-    printf( "sizeof(int)       = %zu bytes\n", sizeof(int)       );
-    printf( "sizeof(long long) = %zu bytes\n", sizeof(long long) );
-    printf( "sizeof( int64_t ) = %zu bytes\n", sizeof( int64_t ) );
+    printf( "    sizeof( int     ) = %zu bytes\n", sizeof( int     ) );
+    printf( "    sizeof( int32   ) = %zu bytes\n", sizeof( int32_t ) );
+    printf( "    sizeof(long long) = %zu bytes\n", sizeof(long long) );
+    printf( "    sizeof( int64_t ) = %zu bytes\n", sizeof( int64_t ) );
+    printf( "    sizeof(uint64_t ) = %zu bytes\n", sizeof(uint64_t ) );
 
     benchmark::Initialize(&argc, argv);
     benchmark::RunSpecifiedBenchmarks();

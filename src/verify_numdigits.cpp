@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-#include "util_benchmark.h"
-#include <assert.h>
-#include <inttypes.h> // PRId64
+    #include <stdio.h>    // printf()
+    #include <assert.h>
+    #include <inttypes.h> // PRId64
+    #include <algorithm>  // abs()
 
 inline static uint32_t digits10_alexandrescu_v3( uint64_t );
 #define digits10_fixed digits10_alexandrescu_v3
@@ -665,8 +666,6 @@ void verify_int()
         , { numdigits_gabriel_v1b              , "gabriel_v1b"               }
         , { numdigits_gabriel_v1c              , "gabriel_v1c"               }
         , { numdigits_if_naive                 , "if_naive"                  }
-        , { numdigits10_int                    , "reference_int"             }
-        , { numdigits10_int32                  , "reference_int32"           }
         , { numdigits_microsoft_itoa_strlen    , "microsoft_itoa_strlen"     }
         , { numdigits_pohoreski_v1a            , "pohoreski_v1a"             }
         , { numdigits_pohoreski_v1b            , "pohoreski_v1b"             }
@@ -676,9 +675,12 @@ void verify_int()
         , { numdigits_pohoreski_v3b            , "pohoreski_v3b"             }
         , { numdigits_pohoreski_v4a            , "pohoreski_v4a"             }
         , { numdigits_pohoreski_v4b            , "pohoreski_v4b"             }
-        , { numdigits10_int                    , "reference_int"             }
         , { numdigits_ransom                   , "ransom"                    }
+        , { numdigits10_int32                  , "reference_int32"           }
+        , { numdigits10_int                    , "reference_pow10_int"       }
+        , { numdigits10_mixed_int              , "reference_mixed_int"       }
         , { numdigits_simple                   , "simple"                    }
+        , { numdigits_simple_reverse           , "simple_reverse"            }
         , { numdigits_thomas                   , "thomas"                    }
         , { numdigits_user42690_buggy          , "user42690_buggy"           }
         , { numdigits_user42690_fixed_a        , "user42690_fixed_a"         }
@@ -728,12 +730,13 @@ void verify_u64()
     };
 
     FuncDescU64 aFuncs[] = {
-          { numdigits10_uint64      , "numdigits10_uint64"       }
-        , { digits10_alexandrescu_v2, "digits10_alexandrescu_v2" }
-        , { digits10_alexandrescu_v3, "digits10_alexandrescu_v3" }
-        , { digits10_gabriel        , "digits10_gabriel"         }
-        , { digits10_pohoreski_v1   , "digits10_pohoreski_v1"    }
-        , { digits10_pohoreski_v2   , "digits10_pohoreski_v2"    }
+          { numdigits10_uint64        , "numdigits10_uint64"         }
+        , { numdigits10_reverse_uint64, "numdigits10_reverse_uint64" }
+        , { digits10_alexandrescu_v2  , "digits10_alexandrescu_v2"   }
+        , { digits10_alexandrescu_v3  , "digits10_alexandrescu_v3"   }
+        , { digits10_gabriel          , "digits10_gabriel"           }
+        , { digits10_pohoreski_v1     , "digits10_pohoreski_v1"      }
+        , { digits10_pohoreski_v2     , "digits10_pohoreski_v2"      }
     };
     const int nFuncs = sizeof(aFuncs) / sizeof(aFuncs[0]);
 
@@ -749,9 +752,11 @@ void verify_u64()
 int main()
 {
     printf( "Verify numdigits()\n" );
-    printf( "sizeof(int)       = %zu bytes\n", sizeof(int)       );
-    printf( "sizeof(long long) = %zu bytes\n", sizeof(long long) );
-    printf( "sizeof( int64_t ) = %zu bytes\n", sizeof( int64_t ) );
+    printf( "    sizeof( int     ) = %zu bytes\n", sizeof( int     ) );
+    printf( "    sizeof( int32   ) = %zu bytes\n", sizeof( int32_t ) );
+    printf( "    sizeof(long long) = %zu bytes\n", sizeof(long long) );
+    printf( "    sizeof( int64_t ) = %zu bytes\n", sizeof( int64_t ) );
+    printf( "    sizeof(uint64_t ) = %zu bytes\n", sizeof(uint64_t ) );
 
     verify_int();
     verify_i64();

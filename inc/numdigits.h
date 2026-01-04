@@ -43,7 +43,31 @@ uint32_t numdigits10_uint64( uint64_t n )
     /*else<=18'446'744'073'709'551'615*/   return 20; // 2^64 - 1
 }
 
-// Reference int
+uint32_t numdigits10_reverse_uint64( uint64_t n )
+{
+    if (n >= 10'000'000'000'000'000'000ull) return 20; // 2^64 - 1
+    if (n >=  1'000'000'000'000'000'000ull) return 19;
+    if (n >=    100'000'000'000'000'000ull) return 18;
+    if (n >=     10'000'000'000'000'000ull) return 17;
+    if (n >=      1'000'000'000'000'000ull) return 16;
+    if (n >=        100'000'000'000'000ull) return 15;
+    if (n >=         10'000'000'000'000ull) return 14;
+    if (n >=          1'000'000'000'000ull) return 13;
+    if (n >=            100'000'000'000ull) return 12;
+    if (n >=             10'000'000'000ull) return 11;
+    if (n >=              1'000'000'000ull) return 10;
+    if (n >=                100'000'000ull) return  9;
+    if (n >=                 10'000'000ull) return  8;
+    if (n >=                  1'000'000ull) return  7;
+    if (n >=                    100'000ull) return  6;
+    if (n >=                     10'000ull) return  5;
+    if (n >=                      1'000ull) return  4;
+    if (n >=                        100ull) return  3;
+    if (n >=                         10ull) return  2;
+    /*else>=                          0  */ return  1;
+}
+
+// Reference int using standard powers of 10 and zero
 int numdigits10_int( int n )
 {
     if (n <=-1'000'000'000ll) return 11; // -2'147'483'648 .. -1'000'000'000  -2^31
@@ -55,6 +79,31 @@ int numdigits10_int( int n )
     if (n <=        -1'000ll) return  5; //         -9'999 ..         -1'000
     if (n <=          -100ll) return  4; //           -999 ..           -100
     if (n <=           -10ll) return  3; //            -99 ..            -10
+    if (n <              0ll) return  2; //             -9 ..             -1
+    if (n <             10ll) return  1; //              0 ..              9
+    if (n <            100ll) return  2; //             10 ..             99
+    if (n <          1'000ll) return  3; //            100 ..           '999
+    if (n <         10'000ll) return  4; //          1'000 ..          9'999
+    if (n <        100'000ll) return  5; //         10'000 ..         99'999
+    if (n <      1'000'000ll) return  6; //        100'000 ..        999'999
+    if (n <     10'000'000ll) return  7; //      1'000'000 ..      9'999'999
+    if (n <    100'000'000ll) return  8; //     10'000'000 ..     99'999'999
+    if (n <  1'000'000'000ll) return  9; //    100'000'000 ..    999'999'999
+    /*else<= 2'147'483'647 */ return 10; //  1'000'000'000 ..  2'147'483'647   2^31 - 1
+}
+
+// powers of 10 and repeating 9s
+int numdigits10_mixed_int( int n )
+{
+    if (n <   -999'999'999ll) return 11; // -2'147'483'648 .. -1'000'000'000  -2^31
+    if (n <    -99'999'999ll) return 10; //   -999'999'999 ..   -100'000'000
+    if (n <     -9'999'999ll) return  9; //    -99'999'999 ..    -10'000'000
+    if (n <       -999'999ll) return  8; //     -9'999'999 ..     -1'000'000
+    if (n <        -99'999ll) return  7; //       -999'999 ..       -100'000
+    if (n <         -9'999ll) return  6; //        -99'999 ..        -10'000
+    if (n <           -999ll) return  5; //         -9'999 ..         -1'000
+    if (n <            -99ll) return  4; //           -999 ..           -100
+    if (n <             -9ll) return  3; //            -99 ..            -10
     if (n <              0ll) return  2; //             -9 ..             -1
     if (n <             10ll) return  1; //              0 ..              9
     if (n <            100ll) return  2; //             10 ..             99
@@ -414,16 +463,18 @@ int numdigits_if_naive( int n )
     /*else<=2'147'483'647*/return 10; // 1'000'000'000 .. 2'147'483'647
 }
 
+#include <string>
 // Only really for testing of how slow _itoa() is!
 int32_t numdigits_microsoft_itoa_strlen( int n )
 {
-    char buffer[16];
 #if _MSC_VER
+    char buffer[16];
     assert( sizeof(buffer) >= _MAX_ITOSTR_BASE10_COUNT );
     _itoa( n, buffer, 10 );
     return (int32_t) strlen( buffer );
 #else
-    return 0;
+    std::string buffer = std::to_string( n );
+    return (int32_t) buffer.length();
 #endif
 }
 
@@ -566,8 +617,26 @@ int numdigits_simple_int64(int64_t n)
     else       return     numdigits10_uint64( (uint64_t)  n );
 }
 
+// Simple version
+int numdigits_simple_v2_int64(int64_t n)
+{
+    if (n <=-1'000'000'000'000'000'000ll) return 20; // handle edge case of negating int min
+    if (n < 0) return 1 + numdigits10_reverse_uint64( (uint64_t) -n );
+    else       return     numdigits10_reverse_uint64( (uint64_t)  n );
+}
+
 int numdigits_simple(int n) {
     return numdigits_simple_int64( (int64_t) n );
+}
+
+int numdigits_simple_reverse_int64(int64_t n)
+{
+    if (n == INT64_MIN) return 20; // handle edge case of negating int min
+    if (n < 0) return 1 + numdigits10_reverse_uint64( (uint64_t) -n );
+    else       return     numdigits10_reverse_uint64( (uint64_t)  n );
+}
+int numdigits_simple_reverse(int n) {
+    return numdigits_simple_reverse_int64( (int64_t) n );
 }
 
 // https://stackoverflow.com/questions/1696086/whats-the-best-way-to-get-the-length-of-the-decimal-representation-of-an-int-in
