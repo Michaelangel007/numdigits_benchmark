@@ -640,4 +640,4 @@ Is this THE fastest `NumDigitsBase10()`? Who knows but if we can optimize someth
 
 This README is Copyleft {C} 2025 Michaelangel007.
 
-Last updated Dec. 23, 2025.
+Last updated Jan. 5, 2026.
