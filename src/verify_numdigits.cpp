@@ -529,6 +529,46 @@ static void validate_table_i64( const int64_t  *aNumbers, int nNumbers, const ch
 static void validate_table_u64( const uint64_t *aNumbers, int nNumbers, const char *pDescription, NumDigitsU64FuncPtr pFunc );
 
 // ========================================
+enum VerificationFlags_e
+{
+      VERIFY_INT = (1 << 0)
+    , VERIFY_I64 = (1 << 1)
+    , VERIFY_U64 = (1 << 2)
+    , VERIFY_ORG = (1 << 3)
+    , VERIFY_ALL = VERIFY_INT | VERIFY_I64 | VERIFY_U64 | VERIFY_ORG
+    , VERIFY_NONE = 0
+};
+int g_bVerificationTests = VERIFY_ALL;
+
+void initialize( int nArg, char *aArg[] )
+{
+    if (nArg > 1)
+    {
+        g_bVerificationTests = VERIFY_NONE;
+
+        int iArg = 1;
+        for( iArg = 1; iArg < nArg; iArg++ )
+        {
+            char  *pArg = aArg[ iArg ];
+            size_t nLen = strlen( pArg );
+            if (nLen > 0)
+            {
+                if (strcmp( pArg, "-int") == 0)
+                    g_bVerificationTests |= VERIFY_INT;
+                else
+                if (strcmp( pArg, "-i64") == 0)
+                    g_bVerificationTests |= VERIFY_I64;
+                else
+                if (strcmp( pArg, "-u64") == 0)
+                    g_bVerificationTests |= VERIFY_U64;
+                else
+                if (strcmp( pArg, "-org") == 0)
+                    g_bVerificationTests |= VERIFY_ORG;
+            }
+        }
+    }
+}
+
 
 // Three Optimization Tips for C++, Slide 27 of 33
 // http://www.slideshare.net/andreialexandrescu1/three-optimization-tips-for-c-15708507
@@ -750,7 +790,7 @@ void verify_u64()
 }
 
 // ========================================
-int main()
+int main( int nArg, char *aArg[] )
 {
     printf( "Verify numdigits()\n" );
     printf( "    sizeof( int     ) = %zu bytes\n", sizeof( int     ) );
@@ -759,10 +799,11 @@ int main()
     printf( "    sizeof( int64_t ) = %zu bytes\n", sizeof( int64_t ) );
     printf( "    sizeof(uint64_t ) = %zu bytes\n", sizeof(uint64_t ) );
 
-    verify_int();
-    verify_i64();
-    verify_u64();
-    test_original_digits10();
+    initialize( nArg, aArg );
+    if (g_bVerificationTests & VERIFY_INT) verify_int();
+    if (g_bVerificationTests & VERIFY_I64) verify_i64();
+    if (g_bVerificationTests & VERIFY_U64) verify_u64();
+    if (g_bVerificationTests & VERIFY_ORG) test_original_digits10();
 
     printf( "\nDone.\n" );
     return 0;
