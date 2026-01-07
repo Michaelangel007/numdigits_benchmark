@@ -83,12 +83,12 @@ BENCHMARK(bench_numdigits_alexandrescu_pohoreski_v3);
 static void bench_numdigits_alink_buggy_v1(benchmark::State& state) {
     bench<numdigits_alink_buggy_v1>(state);
 }
-BENCHMARK(bench_numdigits_alink_buggy_v1);
+BENCHMARK_2(bench_numdigits_alink_buggy_v1, false);
 
 static void bench_numdigits_alink_buggy_v2(benchmark::State& state) {
     bench<numdigits_alink_buggy_v2>(state);
 }
-BENCHMARK(bench_numdigits_alink_buggy_v2);
+BENCHMARK_2(bench_numdigits_alink_buggy_v2, false);
 
 static void bench_numdigits_alink_fixed_v1a(benchmark::State& state) {
     bench<numdigits_alink_fixed_v1a>(state);
@@ -228,7 +228,7 @@ BENCHMARK(bench_numdigits_thomas);
 static void bench_numdigits_user42690_buggy(benchmark::State& state) {
     bench<numdigits_user42690_buggy>(state);
 }
-BENCHMARK(bench_numdigits_user42690_buggy);
+BENCHMARK_2(bench_numdigits_user42690_buggy, false);
 
 static void bench_numdigits_user42690_fixed_a(benchmark::State& state) {
     bench<numdigits_user42690_fixed_a>(state);

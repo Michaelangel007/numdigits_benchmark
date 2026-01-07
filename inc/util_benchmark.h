@@ -103,9 +103,10 @@ namespace benchmark
         int              Passes;
         int              MinPasses;
         State            States;
-        bool             WarnBadBenchmarkResults;
+        bool             WarnBadBenchmarkResults; // Auto detection
+        bool             BrokenImplementation;    // Manually flagged by user
 
-        Benchmark(const BenchmarkFuncPtr InFunc, const char* InName)
+        Benchmark(const BenchmarkFuncPtr InFunc, const char* InName, const bool InWorkingImplementation = true)
         {
             Func = InFunc;
             Name = InName;
@@ -118,6 +119,7 @@ namespace benchmark
             Passes = 0;
             WarnBadBenchmarkResults = false;
             MinPasses = 500;
+            BrokenImplementation = !InWorkingImplementation;
         }
     };
 
@@ -207,7 +209,7 @@ namespace benchmark
                 {
                     if (ResultNoOptimize && (FirstNoOptimize != ResultNoOptimize))
                     {
-                        bench->WarnBadBenchmarkResults = true;
+                        bench->WarnBadBenchmarkResults = true; // Auto-detect broken implementation
                     }
                 }
                 else
@@ -239,7 +241,8 @@ namespace benchmark
                 RegisteredBenchmarks.clear();
                 for (Benchmark* bench : aRuns[ iRun ])
                 {
-                    Benchmark *copy = new Benchmark( bench->Func, bench->Name );
+                    Benchmark *copy = new Benchmark( bench->Func, bench->Name, bench->BrokenImplementation );
+                    copy->BrokenImplementation |= bench->WarnBadBenchmarkResults; // Auto-detect broken implementation
                     RegisteredBenchmarks.push_back( copy );
                 }
             }
@@ -280,7 +283,10 @@ namespace benchmark
         printf( "=== Summary (Best to Worst) ===\n" );
         for (Benchmark* bench : sorted)
         {
-            printf( "%c %2d ", Separator, iRank );
+            if (bench->BrokenImplementation)
+                printf( "%c -- ", Separator ); // Don't rank suspicious implementation to prevent gaming the system
+            else
+                printf( "%c %2d ", Separator, iRank++ );
             printf( "%c %*s ", Separator, -(int)MaximumName, bench->Name );
             if (bench->Metrics.AverageNSPerCall > 0.0)
                 printf( "%c~%7.3f avg ns/call%c%7.2f%%%c\n"
@@ -292,7 +298,6 @@ namespace benchmark
                     , Separator, bench->Metrics.NSPerCall
                     , Separator, bench->Metrics.PercentFaster
                     , Separator );
-            iRank++;
         }
     }
 
@@ -394,13 +399,19 @@ namespace benchmark
     }
 }
 
-#define STRINGIFY(x)           #x
-#define BENCH_ID               __LINE__
-#define JOIN2(x,y)             x##y
-#define JOIN3(x,y,z)           x##y##z
-#define MAKE_FUNC_NAME3(x,y,z) JOIN3(x,y,z)
-#define MAKE_FUNC_NAME(x)      MAKE_FUNC_NAME3(x,_Benchmark_,BENCH_ID)
-#define BENCHMARK(FuncName)    static ::benchmark::Benchmark * MAKE_FUNC_NAME(FuncName) = ::benchmark::Register( new ::benchmark::Benchmark(FuncName, STRINGIFY(FuncName) ));
+#define STRINGIFY(x)               #x
+#define BENCH_ID                   __LINE__
+#define JOIN2(x,y)                 x##y
+#define JOIN3(x,y,z)               x##y##z
+#define CONCAT(x,y)                JOIN2(x,y)
+#define MAKE_FUNC_NAME3(x,y,z)     JOIN3(x,y,z)
+#define MAKE_FUNC_NAME(x)          MAKE_FUNC_NAME3(x,_Benchmark_,BENCH_ID)
+#define VARGS_(_10, _9, _8, _7, _6, _5, _4, _3, _2, _1, N, ...) N
+#define VARGS(...) VARGS_(__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+
+#define BENCHMARK_2(FuncName,IsGood) static ::benchmark::Benchmark * MAKE_FUNC_NAME(FuncName) = ::benchmark::Register( new ::benchmark::Benchmark(FuncName, STRINGIFY(FuncName), IsGood ))
+#define BENCHMARK_1(FuncName)        BENCHMARK_2(FuncName,true)
+#define BENCHMARK(...)               CONCAT(BENCHMARK_,VARGS(__VA_ARGS__))(__VA_ARGS__)
 
 #else
     #include <benchmark/benchmark.h>
