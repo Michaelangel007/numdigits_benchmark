@@ -135,13 +135,17 @@ namespace benchmark
         int nArg = *Argc;
         for( iArg = 1; iArg < nArg; iArg++ )
         {
-            if (Argv[iArg][0] == '-')
+            char  *pArg = Argv[ iArg ];
+            size_t nLen = strlen( pArg );
+
+            if (pArg[0] == '-')
             {
-                if (strcmp(Argv[iArg], "-markdown") == 0)
+                if (strcmp(pArg, "-markdown") == 0)
                 {
                     Separator = '|';
                 }
-                if (Argv[iArg][1] == '?')
+                else
+                if ((nLen > 0) && (pArg[1] == '?'))
                 {
                     printf(
 "Usage: [-markdown] [#]\n"
@@ -155,7 +159,7 @@ namespace benchmark
             }
             else
             {
-                nRuns = atoi( Argv[ iArg ] );
+                nRuns = atoi( pArg );
                 nRuns = std::min( nRuns, 9 );
                 nRuns = std::max( nRuns, 1 );
                 if (nRuns == 2) // We can't do a "Best of" with only 2 tests
