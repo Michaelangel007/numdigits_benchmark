@@ -89,6 +89,25 @@ int numdigits_dumb_sprintf_strlen( int n )
 
 It works but it is S-L-O-W.
 
+Now a Mathematician would say: _Why not just use `log10( n )`?_
+
+Unfortunately, there are three problems with that:
+
+1. It doesn't work with negative numbers. We can trivially "fold" negative numbers to postive with the absolute value (and also add 1 to the length if the original number is negative to account for the negative sign.) We also need to be mindful of INT_MIN since it has no represenation with `int`; we either need to handle this edge case or using a bigger int type such as `int64_t`.
+
+2. It doesn't handle zero since `log10(0)` is undefined. Again we can check for this edge case.
+
+3. An _integer log_ is unfortunately **non-standard** which means we need to either implement one ourselves or use the built-in `log()`. For the `<cmath>` or <math.h> standard this means cast to a `double`, take the `floor()`, cast the result back in an integer, and add one. All this casting is SLOW.
+
+Here is an edge cases to show what needs to happen:
+
+| n   | log10()    | floor() | +1 |
+|----:|-----------:|--------:|---:|
+| 99  | 1.99563... |       1 |  2 |
+| 100 | 2.00000000 |       2 |  3 |
+| 101 | 2.00432... |       2 |  3 |
+
+
 These StackOverflow questions ...
 
 * [What's the best way to get the length of the decimal representation of an int in C++?](https://stackoverflow.com/questions/1696086/whats-the-best-way-to-get-the-length-of-the-decimal-representation-of-an-int-in/)
