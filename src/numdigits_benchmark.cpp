@@ -113,12 +113,17 @@ BENCHMARK(bench_numdigits_alink_fixed_v2b);
 static void bench_numdigits_clifford_buggy(benchmark::State& state) {
     bench<numdigits_clifford_buggy>(state);
 }
-BENCHMARK(bench_numdigits_clifford_buggy);
+BENCHMARK_2(bench_numdigits_clifford_buggy, false);
 
 static void bench_numdigits_clifford_fixed(benchmark::State& state) {
     bench<numdigits_clifford_fixed>(state);
 }
 BENCHMARK(bench_numdigits_clifford_fixed);
+
+static void bench_numdigits_dagostino_pohoreski(benchmark::State& state) {
+    bench<numdigits_dagostino_pohoreski>(state);
+}
+BENCHMARK(bench_numdigits_dagostino_pohoreski);
 
 static void bench_numdigits_dumb_sprintf_strlen(benchmark::State& state) {
     bench<numdigits_dumb_sprintf_strlen>(state);

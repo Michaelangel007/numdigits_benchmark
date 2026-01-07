@@ -775,6 +775,7 @@ void verify_u64()
         , { numdigits10_reverse_uint64, "numdigits10_reverse_uint64" }
         , { digits10_alexandrescu_v2  , "digits10_alexandrescu_v2"   }
         , { digits10_alexandrescu_v3  , "digits10_alexandrescu_v3"   }
+        , { digits10_dagostino        , "digits10_dagostino"         }
         , { digits10_gabriel          , "digits10_gabriel"           }
         , { digits10_pohoreski_v1     , "digits10_pohoreski_v1"      }
         , { digits10_pohoreski_v2     , "digits10_pohoreski_v2"      }

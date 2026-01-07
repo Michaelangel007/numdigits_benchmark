@@ -391,6 +391,63 @@ int numdigits_clifford_fixed( int n )
     return n >= 0 ? digits : digits + 1 ;
 }
 
+// Francesco D'Agostino
+#include <array>    // std::array<>
+#if 0 // C++23
+    constexpr auto init_array()
+    {
+         std::array<uint64_t,19> _values;
+         for ( std::size_t ndx = 0; ndx < _values.size(); ndx++ )
+            _values[ndx] = std::pow(10, ndx + 1);
+
+         return _values;
+    }
+    constexpr static const auto Pow10_u64 = init_array();
+#else
+    const std::array<uint64_t,19> Pow10_u64 =
+    {
+                            10ull // [ 0]
+        ,                  100ull // [ 1]
+        ,                 1000ull // [ 2]
+        ,                10000ull // [ 3]
+        ,               100000ull // [ 4]
+        ,              1000000ull // [ 5]
+        ,             10000000ull // [ 6]
+        ,            100000000ull // [ 7]
+        ,           1000000000ull // [ 8]
+        ,          10000000000ull // [ 9]
+        ,         100000000000ull // [10]
+        ,        1000000000000ull // [11]
+        ,       10000000000000ull // [12]
+        ,      100000000000000ull // [13]
+        ,     1000000000000000ull // [14]
+        ,    10000000000000000ull // [15]
+        ,   100000000000000000ull // [16]
+        ,  1000000000000000000ull // [17]
+        , 10000000000000000000ull // [18]
+    };
+#endif
+
+uint32_t digits10_dagostino( uint64_t n )
+{
+    return
+         (n >= Pow10_u64[ 0]) + (n >= Pow10_u64[ 1]) + (n >= Pow10_u64[ 2]) +
+         (n >= Pow10_u64[ 3]) + (n >= Pow10_u64[ 4]) + (n >= Pow10_u64[ 5]) +
+         (n >= Pow10_u64[ 6]) + (n >= Pow10_u64[ 7]) + (n >= Pow10_u64[ 8]) +
+         (n >= Pow10_u64[ 9]) + (n >= Pow10_u64[10]) + (n >= Pow10_u64[11]) +
+         (n >= Pow10_u64[12]) + (n >= Pow10_u64[13]) + (n >= Pow10_u64[14]) +
+         (n >= Pow10_u64[15]) + (n >= Pow10_u64[16]) + (n >= Pow10_u64[17]) +
+         (n >= Pow10_u64[18]);
+         ;
+}
+
+int numdigits_dagostino_pohoreski( int n )
+{
+    const int64_t  i = n;
+    const uint64_t x = abs(i);
+    return (n < 0) + digits10_dagostino( x );
+}
+
 // Dumb string version using sprintf() strlen()
 int numdigits_dumb_int64( int64_t n )
 {
