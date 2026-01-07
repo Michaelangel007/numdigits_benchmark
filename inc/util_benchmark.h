@@ -1,4 +1,5 @@
 /*
+// v1.8 Add support to flag broken implementations with BENCHMARK_2(name,false) and not include them in the ranking
 // v1.7 Add -? usage help and examples
 // v1.6 Add -markdown command-line argument, pretty print support (markdown table and rank in best)
 // v1.5 Add Best of N support
