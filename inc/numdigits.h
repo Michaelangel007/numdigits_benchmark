@@ -2,7 +2,7 @@
 // Fastest x86:  numdigits_alexandrescu_pohoreski_v3( int n )
 // Fastest M# :  numdigits_simple( int n ) -> numdigits10_uint64()
 // Easiest:  numdigits_dumb_sprintf_strlen( int x );
-// Simplist: numdigits10_uint32( uint32_t n )
+// Simplest: numdigits10_uint32( uint32_t n )
 
 // Reference uint32_t
 uint32_t numdigits10_uint32( uint32_t n )
