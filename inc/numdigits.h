@@ -430,7 +430,7 @@ int numdigits_clifford_fixed( int n )
 
 uint32_t digits10_dagostino( uint64_t n )
 {
-    return
+    return 1 +
          (n >= Pow10_u64[ 0]) + (n >= Pow10_u64[ 1]) + (n >= Pow10_u64[ 2]) +
          (n >= Pow10_u64[ 3]) + (n >= Pow10_u64[ 4]) + (n >= Pow10_u64[ 5]) +
          (n >= Pow10_u64[ 6]) + (n >= Pow10_u64[ 7]) + (n >= Pow10_u64[ 8]) +

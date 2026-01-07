@@ -701,6 +701,7 @@ void verify_int()
         , { numdigits_alink_fixed_v2b          , "alink_fixed_v2b"           }
         , { numdigits_clifford_buggy           , "clifford_buggy"            }
         , { numdigits_clifford_fixed           , "clifford_fixed"            }
+        , { numdigits_dagostino_pohoreski      , "dagostino_pohoreski"       }
         , { numdigits_dumb_sprintf_strlen      , "dumb_sprintf_strlen"       }
         , { numdigits_gabriel_v1a              , "gabriel_v1a"               }
         , { numdigits_gabriel_v1b              , "gabriel_v1b"               }
