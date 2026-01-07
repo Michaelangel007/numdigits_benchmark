@@ -241,7 +241,7 @@ namespace benchmark
                 RegisteredBenchmarks.clear();
                 for (Benchmark* bench : aRuns[ iRun ])
                 {
-                    Benchmark *copy = new Benchmark( bench->Func, bench->Name, bench->BrokenImplementation );
+                    Benchmark *copy = new Benchmark( bench->Func, bench->Name, !bench->BrokenImplementation );
                     copy->BrokenImplementation |= bench->WarnBadBenchmarkResults; // Auto-detect broken implementation
                     RegisteredBenchmarks.push_back( copy );
                 }
