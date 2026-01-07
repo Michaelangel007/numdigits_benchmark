@@ -519,32 +519,36 @@ inline static uint32_t digits10_alexandrescu_v3( uint64_t );
     };
     const int NUM_U64_POW10 = sizeof(TEST_U64_POW10) / sizeof(uint64_t);
 
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-typedef int      (*NumDigitsIntFuncPtr)(int     );
-typedef int32_t  (*NumDigitsI64FuncPtr)(int64_t );
-typedef uint32_t (*NumDigitsU64FuncPtr)(uint64_t);
+    typedef int      (*NumDigitsIntFuncPtr)(int     );
+    typedef int32_t  (*NumDigitsI64FuncPtr)(int64_t );
+    typedef uint32_t (*NumDigitsU64FuncPtr)(uint64_t);
 
-static void validate_table_int( const IntKeyVal*aNumbers, int nNumbers, const char *pDescription, NumDigitsIntFuncPtr pFunc );
-static void validate_table_i64( const int64_t  *aNumbers, int nNumbers, const char *pDescription, NumDigitsI64FuncPtr pFunc );
-static void validate_table_u64( const uint64_t *aNumbers, int nNumbers, const char *pDescription, NumDigitsU64FuncPtr pFunc );
+    static void validate_table_int( const IntKeyVal*aNumbers, int nNumbers, const char *pDescription, NumDigitsIntFuncPtr pFunc );
+    static void validate_table_i64( const int64_t  *aNumbers, int nNumbers, const char *pDescription, NumDigitsI64FuncPtr pFunc );
+    static void validate_table_u64( const uint64_t *aNumbers, int nNumbers, const char *pDescription, NumDigitsU64FuncPtr pFunc );
 
 // ========================================
-enum VerificationFlags_e
-{
-      VERIFY_INT = (1 << 0)
-    , VERIFY_I64 = (1 << 1)
-    , VERIFY_U64 = (1 << 2)
-    , VERIFY_ORG = (1 << 3)
-    , VERIFY_ALL = VERIFY_INT | VERIFY_I64 | VERIFY_U64 | VERIFY_ORG
-    , VERIFY_NONE = 0
-};
-int g_bVerificationTests = VERIFY_ALL;
+    enum CategoryFlags_e
+    {
+          CATEGORY_INT = (1 << 0)
+        , CATEGORY_I64 = (1 << 1)
+        , CATEGORY_U64 = (1 << 2)
+        , CATEGORY_ORG = (1 << 3)
+        , CATEGORY_ALL = CATEGORY_INT | CATEGORY_I64 | CATEGORY_U64 | CATEGORY_ORG
+        , CATEGORY_NONE = 0
+    };
+          int   g_bCategoryTests   = CATEGORY_ALL;
+    const char *g_pCategoryInclude = "*";
+          bool  g_bCategoryPrint   = false;
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 void initialize( int nArg, char *aArg[] )
 {
     if (nArg > 1)
     {
-        g_bVerificationTests = VERIFY_NONE;
+        bool bSpecifiedTests = false;
+        int  bVerificationTests = CATEGORY_NONE;
 
         int iArg = 1;
         for( iArg = 1; iArg < nArg; iArg++ )
@@ -553,22 +557,66 @@ void initialize( int nArg, char *aArg[] )
             size_t nLen = strlen( pArg );
             if (nLen > 0)
             {
-                if (strcmp( pArg, "-int") == 0)
-                    g_bVerificationTests |= VERIFY_INT;
+                if (strcmp( pArg, "-int") == 0) {
+                    bVerificationTests |= CATEGORY_INT;
+                    bSpecifiedTests = true;
+                }
                 else
-                if (strcmp( pArg, "-i64") == 0)
-                    g_bVerificationTests |= VERIFY_I64;
+                if (strcmp( pArg, "-i64") == 0) {
+                    bVerificationTests |= CATEGORY_I64;
+                    bSpecifiedTests = true;
+                }
                 else
-                if (strcmp( pArg, "-u64") == 0)
-                    g_bVerificationTests |= VERIFY_U64;
+                if (strcmp( pArg, "-u64") == 0) {
+                    bVerificationTests |= CATEGORY_U64;
+                    bSpecifiedTests = true;
+                }
                 else
-                if (strcmp( pArg, "-org") == 0)
-                    g_bVerificationTests |= VERIFY_ORG;
+                if (strcmp( pArg, "-org") == 0) {
+                    bVerificationTests |= CATEGORY_ORG;
+                    bSpecifiedTests = true;
+                }
+                else
+                if( strncmp( pArg, "-tests=", 7 ) == 0) {
+                    g_pCategoryInclude = pArg + 7;
+                    if (strcmp( g_pCategoryInclude, "?" ) == 0)
+                        g_bCategoryPrint = true;
+                }
             }
+        }
+
+        if (bVerificationTests) {
+            g_bCategoryTests = bVerificationTests;
+
+#if _DEBUG
+    printf( "Selected categories: %0X\n", g_bCategoryTests );
+        if (g_bCategoryTests & CATEGORY_INT) printf( "\tint\n" );
+        if (g_bCategoryTests & CATEGORY_I64) printf( "\ti64\n" );
+        if (g_bCategoryTests & CATEGORY_U64) printf( "\tu64\n" );
+        if (g_bCategoryTests & CATEGORY_ORG) printf( "\torg\n" );
+    printf( "Category Includ: %s\n", g_pCategoryInclude );
+    printf( "Category Print : %d\n", g_bCategoryPrint );
+#endif
         }
     }
 }
 
+// NULL    = run all tests
+// *       = run all tests
+// <NAME>  = run specific test
+// <NAME>, = run specific tests
+bool isTestIncluded(const char *pTestNames, const char *pNextTestName)
+{
+    if (!pTestNames) return true;
+
+    const size_t nLen = strlen( pTestNames );
+    if ((nLen == 1) && (pTestNames[0] == '*')) return true;
+
+    const char *pFound = strstr( pTestNames, pNextTestName );
+    if (pFound) return true;
+
+    return false;
+}
 
 // Three Optimization Tips for C++, Slide 27 of 33
 // http://www.slideshare.net/andreialexandrescu1/three-optimization-tips-for-c-15708507
@@ -683,6 +731,8 @@ void validate_table_u64( const uint64_t* aNumbers, int nNumbers, const char* pDe
 // ========================================
 void verify_int()
 {
+    const char *CATEGORY = "int";
+
     struct FuncDescInt
     {
         NumDigitsIntFuncPtr pFunc;
@@ -731,16 +781,28 @@ void verify_int()
     };
     const int nFuncs = sizeof(aFuncs) / sizeof(aFuncs[0]);
 
+    if (g_bCategoryPrint)
+        printf( "Available tests for '-%s' (%d):\n", CATEGORY, nFuncs );
+        for (int iFunc = 0; iFunc < nFuncs; iFunc++) {
+            const char *pNextTestName = aFuncs[ iFunc ].pName;
+            printf( "    %s\n", pNextTestName );
+        }
+
     printf( "----------------------------------------\n\n" );
     for (int iFunc = 0; iFunc < nFuncs; iFunc++) {
-        printf( "\n========== %s (int) ==========\n", aFuncs[ iFunc ].pName );
-        test_int( aFuncs[ iFunc ].pFunc );
+        const char *pNextTestName = aFuncs[ iFunc ].pName;
+        bool bRunTest = isTestIncluded( g_pCategoryInclude, pNextTestName );
+        if (bRunTest) {
+            printf( "\n========== %s (%s) ==========\n", pNextTestName, CATEGORY );
+            test_int( aFuncs[ iFunc ].pFunc );
+        }
     }
     printf( "\n" );
 }
 
 void verify_i64()
 {
+    const char *CATEGORY = "i64";
     struct FuncDescI64
     {
         NumDigitsI64FuncPtr pFunc;
@@ -755,16 +817,28 @@ void verify_i64()
     };
     const int nFuncs = sizeof(aFuncs) / sizeof(aFuncs[0]);
 
+    if (g_bCategoryPrint)
+        printf( "Available tests for '-%s' (%d):\n", CATEGORY, nFuncs );
+        for (int iFunc = 0; iFunc < nFuncs; iFunc++) {
+            const char *pNextTestName = aFuncs[ iFunc ].pName;
+            printf( "    %s\n", pNextTestName );
+        }
+
     printf( "----------------------------------------\n\n" );
     for (int iFunc = 0; iFunc < nFuncs; iFunc++) {
-        printf( "\n========== %s (i64) ==========\n", aFuncs[ iFunc ].pName );
-        test_i64( aFuncs[ iFunc ].pFunc );
+        const char *pNextTestName = aFuncs[ iFunc ].pName;
+        bool bRunTest = isTestIncluded( g_pCategoryInclude, pNextTestName );
+        if (bRunTest) {
+            printf( "\n========== %s (%s) ==========\n", aFuncs[ iFunc ].pName, CATEGORY );
+            test_i64( aFuncs[ iFunc ].pFunc );
+        }
     }
     printf( "\n" );
 }
 
 void verify_u64()
 {
+    const char *CATEGORY = "u64";
     struct FuncDescU64
     {
         NumDigitsU64FuncPtr pFunc;
@@ -783,14 +857,33 @@ void verify_u64()
     };
     const int nFuncs = sizeof(aFuncs) / sizeof(aFuncs[0]);
 
+    if (g_bCategoryPrint)
+        printf( "Available tests for '-%s' (%d):\n", CATEGORY, nFuncs );
+        for (int iFunc = 0; iFunc < nFuncs; iFunc++) {
+            const char *pNextTestName = aFuncs[ iFunc ].pName;
+            printf( "    %s\n", pNextTestName );
+        }
+
     printf( "----------------------------------------\n\n" );
     for (int iFunc = 0; iFunc < nFuncs; iFunc++) {
-        printf( "\n========== %s (u64) ==========\n", aFuncs[ iFunc ].pName );
-        test_u64( aFuncs[ iFunc ].pFunc );
+        const char *pNextTestName = aFuncs[ iFunc ].pName;
+        bool bRunTest = isTestIncluded( g_pCategoryInclude, pNextTestName );
+        if (bRunTest) {
+            printf( "\n========== %s (%s) ==========\n", aFuncs[ iFunc ].pName, CATEGORY );
+            test_u64( aFuncs[ iFunc ].pFunc );
+        }
     }
     printf( "\n" );
 }
 
+/*
+Examples:
+    -int -tests=?    List all test names
+    -int -tests=*    Run all tests for int
+    -i64
+    -u64
+    -org
+*/
 // ========================================
 int main( int nArg, char *aArg[] )
 {
@@ -800,12 +893,13 @@ int main( int nArg, char *aArg[] )
     printf( "    sizeof(long long) = %zu bytes\n", sizeof(long long) );
     printf( "    sizeof( int64_t ) = %zu bytes\n", sizeof( int64_t ) );
     printf( "    sizeof(uint64_t ) = %zu bytes\n", sizeof(uint64_t ) );
+    printf( "----------------------------------------\n" );
 
     initialize( nArg, aArg );
-    if (g_bVerificationTests & VERIFY_INT) verify_int();
-    if (g_bVerificationTests & VERIFY_I64) verify_i64();
-    if (g_bVerificationTests & VERIFY_U64) verify_u64();
-    if (g_bVerificationTests & VERIFY_ORG) test_original_digits10();
+    if (g_bCategoryTests & CATEGORY_INT) verify_int();
+    if (g_bCategoryTests & CATEGORY_I64) verify_i64();
+    if (g_bCategoryTests & CATEGORY_U64) verify_u64();
+    if (g_bCategoryTests & CATEGORY_ORG) test_original_digits10();
 
     printf( "\nDone.\n" );
     return 0;
