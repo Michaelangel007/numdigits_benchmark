@@ -145,6 +145,11 @@ static void bench_numdigits_if_naive(benchmark::State& state) {
 }
 BENCHMARK(bench_numdigits_if_naive);
 
+static void bench_numdigits_log(benchmark::State& state) {
+    bench<numdigits_log>(state);
+}
+BENCHMARK(bench_numdigits_log);
+
 static void bench_numdigits_microsoft_itoa_strlen(benchmark::State& state) {
     bench<numdigits_microsoft_itoa_strlen>(state);
 }

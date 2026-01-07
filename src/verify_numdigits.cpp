@@ -666,6 +666,7 @@ void verify_int()
         , { numdigits_gabriel_v1b              , "gabriel_v1b"               }
         , { numdigits_gabriel_v1c              , "gabriel_v1c"               }
         , { numdigits_if_naive                 , "if_naive"                  }
+        , { numdigits_log                      , "log"                       }
         , { numdigits_microsoft_itoa_strlen    , "microsoft_itoa_strlen"     }
         , { numdigits_pohoreski_v1a            , "pohoreski_v1a"             }
         , { numdigits_pohoreski_v1b            , "pohoreski_v1b"             }

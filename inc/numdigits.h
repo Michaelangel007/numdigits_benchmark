@@ -464,6 +464,20 @@ int numdigits_if_naive( int n )
     /*else<=2'147'483'647*/return 10; // 1'000'000'000 .. 2'147'483'647
 }
 
+// Naive use of log()
+int numdigits_log(int n)
+{
+    double x = (double)n;
+    int negative = (n < 0);
+    if (negative)
+        x = -x;
+    double digits
+        = (x < 10.) // [0,10)
+        ? 0.0       // [0, 0] Handle log(0) = undefined
+        : log10(x); // (0,10)
+    return negative + (int)(digits) + 1;
+}
+
 #include <string>
 // Only really for testing of how slow _itoa() is!
 int32_t numdigits_microsoft_itoa_strlen( int n )
