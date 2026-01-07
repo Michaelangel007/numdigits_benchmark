@@ -674,7 +674,7 @@ void validate_table_u64( const uint64_t* aNumbers, int nNumbers, const char* pDe
         int32_t expect = numdigits10_uint64( n );
         if (actual != expect) {
             status = false;
-            printf( "(%11" PRId64 ") %2d != %2d %s test [%2d]\n", n, actual, expect, STATUS[status], iNumber );
+            printf( "(%20" PRIu64 ") %2d != %2d %s test [%2d]\n", n, actual, expect, STATUS[status], iNumber );
         }
     }
     printf( "%s %s\n", STATUS[status], pDescription );
